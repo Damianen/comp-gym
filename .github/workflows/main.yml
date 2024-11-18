@@ -30,7 +30,7 @@ jobs:
         run: |
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
-          cd ${GITHUB_WORKSPACE}/dist/apps/comp-gym/ && zip ${GITHUB_WORKSPACE}/comp-gym-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/comp-gym/browser && zip ${GITHUB_WORKSPACE}/comp-gym-release.zip ./* -r
  
       - name: Upload comp-gym artifact for deployment job
         uses: actions/upload-artifact@v3
