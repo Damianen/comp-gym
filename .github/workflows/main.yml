@@ -97,5 +97,5 @@ jobs:
         with:
           app-name: 'Comp-Gym-API'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.NEXTJS_PUBLISHPROFILE }}
+          publish-profile: ${{ secrets.NESTJS_PUBLISHPROFILE }}
           package: .
