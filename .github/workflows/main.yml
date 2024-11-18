@@ -30,13 +30,13 @@ jobs:
         run: |
           echo ${GITHUB_WORKSPACE}
           cd ${GITHUB_WORKSPACE}/dist/apps/data-api/ && zip ${GITHUB_WORKSPACE}/data-api-release.zip ./* -r
-          cd ${GITHUB_WORKSPACE}/dist/apps/Comp-Gym-web/ && zip ${GITHUB_WORKSPACE}/Comp-Gym-web-release.zip ./* -r
+          cd ${GITHUB_WORKSPACE}/dist/apps/comp-gym/ && zip ${GITHUB_WORKSPACE}/comp-gym-release.zip ./* -r
  
-      - name: Upload Comp-Gym-web artifact for deployment job
+      - name: Upload comp-gym artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
-          name: Comp-Gym-web
-          path: Comp-Gym-web-release.zip
+          name: comp-gym
+          path: comp-gym-release.zip
          
       - name: Upload data-api artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -45,7 +45,7 @@ jobs:
           path: data-api-release.zip
          
          
-  deploy-Comp-Gym-web:
+  deploy-comp-gym:
     runs-on: ubuntu-latest
     needs: build
     environment:
@@ -55,10 +55,10 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
-          name: Comp-Gym-web
+          name: comp-gym
  
       - name: Unzip artifact for deployment
-        run: unzip Comp-Gym-web-release.zip
+        run: unzip comp-gym-release.zip
        
       - name: Deploy to static azure web app
         id: builddeploy
