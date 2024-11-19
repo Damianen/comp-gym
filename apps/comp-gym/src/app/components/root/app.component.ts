@@ -12,5 +12,5 @@ import { HomeComponent } from '../home/home.component';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'comp-gym';
+  title = 'Comp Gym';
 }
