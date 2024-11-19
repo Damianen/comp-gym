@@ -110,7 +110,7 @@
   <main class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
     <ul class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <li *ngFor="let workout of workouts" role="list" class="col-span-1 divide-y divide-white/15 ring-1 ring-white/15 rounded-lg bg-gray-800 shadow overflow-hidden">
-          <a href="/workout/{{ workout._id }}">
+          <a class="" routerLink="/workout/{{ workout._id }}" >
             <div class="flex w-full items-center justify-between space-x-6 p-6">
                 <div class="flex-1 truncate">
                   <div class="flex items-center space-x-3">
