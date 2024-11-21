@@ -1,55 +1,36 @@
-import { Injectable } from "@angular/core";
-import { Observable, of, delay } from "rxjs";
-import { IWorkoutIdentity, WorkoutType } from "@comp-gym/shared/api";
+import { Injectable } from '@angular/core';
+import { Observable, of, delay, map } from 'rxjs';
+import {
+  ApiResponse,
+  IWorkoutIdentity,
+  WorkoutType,
+} from '@comp-gym/shared/api';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '@comp-gym/shared/util-env';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class WorkoutService {
-    workouts: IWorkoutIdentity[] = [
-        {
-            _id: '0',
-            name: 'Pull',
-            duration: 60,
-            date: new Date(),
-            type: WorkoutType.WeightLifting
-        },
-        {
-            _id: '1',
-            name: 'Push',
-            duration: 45,
-            date: new Date(),
-            type: WorkoutType.WeightLifting
-        },
-        {
-            _id: '2',
-            name: 'Legs',
-            duration: 90,
-            date: new Date(),
-            type: WorkoutType.WeightLifting
-        },
-        {
-            _id: '2',
-            name: 'Running',
-            duration: 90,
-            date: new Date(),
-            type: WorkoutType.Cardio
-        },
-    ]
+  constructor(private http: HttpClient) {}
 
-    getWorkouts(): IWorkoutIdentity[] {
-        return this.workouts;
-    }
+  workouts: IWorkoutIdentity[] = [];
 
-    getWorkoutsAsObservable(): Observable<IWorkoutIdentity[]> {
-        return of(this.workouts);
-    }
+  getWorkouts(): IWorkoutIdentity[] {
+    return this.workouts;
+  }
 
-    getWorkoutsAsync(): Observable<IWorkoutIdentity[]> {
-        return of(this.workouts).pipe(delay(2000));
-    }
+  getWorkoutsAsObservable(): Observable<IWorkoutIdentity[]> {
+    return of(this.workouts);
+  }
 
-    getWorkoutById(_id: string): IWorkoutIdentity {
-        return this.workouts.filter((workout) => workout._id === _id)[0];
-    }
+  getWorkoutsAsync(): Observable<IWorkoutIdentity[]> {
+    return this.http
+      .get<ApiResponse<any>>(environment.API_URL + 'workouts')
+      .pipe(map((response) => response.results));
+  }
+
+  getWorkoutById(_id: string): IWorkoutIdentity {
+    return this.workouts.filter((workout) => workout._id === _id)[0];
+  }
 }

@@ -1,5 +1,5 @@
 export default {
-  displayName: 'features',
+  displayName: 'user',
   preset: '../../../jest.preset.js',
   testEnvironment: 'node',
   transform: {
