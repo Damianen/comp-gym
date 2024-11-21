@@ -1,12 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BackendFeaturesUserModule } from '@comp-gym/backend/features';
+import { UserModule } from '@comp-gym/backend/user';
 import { MongooseModule } from '@nestjs/mongoose';
+import { WorkoutModule } from '@comp-gym/backend/features';
 
 @Module({
   imports: [
-    BackendFeaturesUserModule,
+    UserModule,
+    WorkoutModule,
     MongooseModule.forRoot(process.env.DB_CONNECTION_STRING, {
       connectionFactory: (connection) => {
         connection.on('connected', () => {

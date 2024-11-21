@@ -26,7 +26,7 @@ export class WorkoutService {
 
   getWorkoutsAsync(): Observable<IWorkoutIdentity[]> {
     return this.http
-      .get<ApiResponse<any>>(environment.API_URL + 'workouts')
+      .get<ApiResponse<any>>(environment.API_URL + 'workout')
       .pipe(map((response) => response.results));
   }
 

@@ -1,9 +1,15 @@
+import { Id } from "./id.type";
+
 export interface IUser {
-    id: string;
+    _id: Id;
     firstName: string;
     lastName: string;
-    doesCardio: boolean;
+    email: string;
+    height: number;
+    weight: number;
     birthdate: Date;
+    doesCardio: boolean;
+    password: string;
 }
 
 export type ICreateUser = Pick<

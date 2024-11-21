@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import { WorkoutDetailComponent, WorkoutListComponent } from '@comp-gym/features';
+import { WorkoutDetailComponent, WorkoutListComponent } from '@comp-gym/frontend/features';
 
 export const appRoutes: Route[] = [
     { path: '', component: HomeComponent },

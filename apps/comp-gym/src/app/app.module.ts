@@ -7,16 +7,10 @@ import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FeaturesModule } from '@comp-gym/features';
+import { FeaturesModule } from '@comp-gym/frontend/features';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HomeComponent,
-        AboutComponent,
-        FooterComponent,
-        HeaderComponent
-    ],
+    declarations: [AppComponent, HomeComponent, AboutComponent, FooterComponent, HeaderComponent],
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes, {

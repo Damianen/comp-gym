@@ -1,4 +1,5 @@
-import { IExersize } from "./exersize.interface";
+import { IExercise } from "./exercise.interface";
+import { IUser } from './user.interface';
 import { Id } from "./id.type";
 
 export enum WorkoutType {
@@ -9,15 +10,18 @@ export enum WorkoutType {
 }
 
 export interface IWorkoutIdentity {
-    _id: string;
+    _id: Id;
+    number: number;
     name: string;
+    description: string;
     duration: number;
     date: Date;
     type: WorkoutType;
+    user: IUser;
 }
 
 export interface IWorkout extends IWorkoutIdentity {
-    exersizes: IExersize;
+    exercises: IExercise[];
 }
 
 export type ICreateWorkout = Pick<IWorkout, 'name'>;

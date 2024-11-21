@@ -1,1 +1,1 @@
-export * from './lib/features';
+export * from './lib/workout/workout.module';
