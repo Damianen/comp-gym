@@ -1,5 +1,4 @@
 import { Id } from "./id.type";
-import { ISet } from "./set.interface";
 
 export enum ExerciseType {
     BodyWheight = 'BodyWheigt',
@@ -11,7 +10,7 @@ export enum ExerciseType {
     Other = 'Other'
 }
 
-export interface IExerciseIdentity {
+export interface IExercise {
     _id: Id;
     number: number;
     name: string;
@@ -19,10 +18,6 @@ export interface IExerciseIdentity {
     exerciseType: ExerciseType;
 }
 
-export interface IExercise extends IExerciseIdentity {
-    sets: ISet[];
-}
-
-export type ICreateExercise = Pick<IExercise, 'name'>;
+export type ICreateExercise = Pick<IExercise, 'name' | 'description' | 'exerciseType'>;
 export type IUpdateExercise = Partial<Omit<IExercise, 'id'>>;
 export type IUpsertExercise = IExercise;

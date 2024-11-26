@@ -1,4 +1,4 @@
-import { IExercise } from "./exercise.interface";
+import { ISet } from "./set.interface";
 import { IUser } from './user.interface';
 import { Id } from "./id.type";
 
@@ -16,15 +16,16 @@ export interface IWorkoutIdentity {
     description: string;
     duration: number;
     date: Date;
+    favorite: boolean;
     type: WorkoutType;
     user: IUser;
 }
 
 export interface IWorkout extends IWorkoutIdentity {
-    exercises: IExercise[];
+    sets: ISet[];
 }
 
-export type ICreateWorkout = Pick<IWorkout, 'name'>;
-export type IUpdateWorkout = Partial<Omit<IWorkout, 'id'>>;
+export type ICreateWorkout = Pick<IWorkout, 'name' | 'description' | 'type'>;
+export type IUpdateWorkout = Partial<Omit<IWorkout, 'id' | 'number'>>;
 export type IUpsertWorkout = IWorkout;
 

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Schema as MongooseSchema } from 'mongoose';
 import { IsMongoId } from 'class-validator';
-import { SetType, ISet } from '@comp-gym/shared/api';
+import { SetType, ISet, IExercise } from '@comp-gym/shared/api';
 
 export type SetDocument = Set & Document;
 
@@ -9,6 +9,9 @@ export type SetDocument = Set & Document;
 export class Set implements ISet {
     @IsMongoId()
     _id!: string;
+
+    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Exercise' })
+    exercise!: IExercise;
 
     @Prop({ required: true, type: Number})
     reps!: number;
@@ -19,7 +22,7 @@ export class Set implements ISet {
     @Prop({ required: true, type: Number})
     weight!: number;
 
-    @Prop({ required: true, type: SetType, default: SetType.Normal})
+    @Prop({ required: true, type: String, default: SetType.Normal})
     type!: SetType;
    
 }

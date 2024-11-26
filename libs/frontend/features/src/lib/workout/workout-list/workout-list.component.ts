@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IWorkoutIdentity } from '@comp-gym/shared/api';
+import { IWorkout } from '@comp-gym/shared/api';
 import { Subscription } from 'rxjs';
 import { WorkoutService } from '../workout.service';
 
@@ -9,7 +9,7 @@ import { WorkoutService } from '../workout.service';
   templateUrl: './workout-list.component.html',
 })
 export class WorkoutListComponent implements OnInit, OnDestroy {
-  workouts?: IWorkoutIdentity[];
+  workouts?: IWorkout[];
   subscription?: Subscription;
   constructor(private workoutService: WorkoutService) {}
 
