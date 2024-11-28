@@ -1,7 +1,6 @@
-import { Id } from "./id.type";
+import { IEntity } from "./Entity.interface";
 
-export interface IUser {
-    _id: Id;
+export interface IUser extends IEntity {
     firstName: string;
     lastName: string;
     email: string;

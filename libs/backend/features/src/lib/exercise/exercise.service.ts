@@ -14,7 +14,6 @@ export class ExerciseService {
     async getAll(): Promise<IExercise[]> {
         const items = await this.exerciseModel
             .find()
-            .populate('exercises', 'user')
             .exec();
         return items;
     }
@@ -43,8 +42,8 @@ export class ExerciseService {
         return this.exerciseModel.findByIdAndUpdate({ _id }, exercise);
     }
 
-    async delete(_id: string): Promise<null> {
-        this.exerciseModel.findByIdAndDelete({ _id });
-        return null;
+    async delete(_id: string): Promise<IExercise | null> {
+        console.log(_id);
+        return this.exerciseModel.findByIdAndDelete({ _id });
     }
 }

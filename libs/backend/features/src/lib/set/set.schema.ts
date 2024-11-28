@@ -10,7 +10,7 @@ export class Set implements ISet {
     @IsMongoId()
     _id!: string;
 
-    @Prop({ required: true, type: MongooseSchema.Types.ObjectId, ref: 'Exercise' })
+    @Prop({ required: false, type: MongooseSchema.Types.ObjectId, ref: 'Exercise' })
     exercise!: IExercise;
 
     @Prop({ required: true, type: Number})

@@ -1,4 +1,5 @@
 import { Id } from "./id.type";
+import { IEntity } from "./Entity.interface";
 
 export enum ExerciseType {
     BodyWheight = 'BodyWheigt',
@@ -10,8 +11,7 @@ export enum ExerciseType {
     Other = 'Other'
 }
 
-export interface IExercise {
-    _id: Id;
+export interface IExercise extends IEntity {
     number: number;
     name: string;
     description: string;

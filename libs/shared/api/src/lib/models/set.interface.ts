@@ -1,5 +1,5 @@
 import { IExercise } from "./exercise.interface";
-import { Id } from "./id.type";
+import { IEntity } from "./Entity.interface";
 
 export enum SetType {
     Drop = 'Drop',
@@ -8,9 +8,8 @@ export enum SetType {
     Normal = 'Normal'
 }
 
-export interface ISet {
-    _id: Id;
-    exercise: IExercise;
+export interface ISet extends IEntity {
+    exercise: IExercise | null;
     reps: number;
     duration: number;
     weight: number;

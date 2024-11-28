@@ -8,12 +8,12 @@ export class SetController {
     constructor(private setService: SetService) {}
 
     @Post('')
-    create(@Request() req: any): Promise<ISet | null> {
+    create(@Body() req: any): Promise<ISet | null> {
         return this.setService.create(req);
     }
 
     @Put(':id')
-    update(@Param(':id') id: string, @Request() req: any): Promise<ISet | null> {
+    update(@Param(':id') id: string, @Body() req: any): Promise<ISet | null> {
         return this.setService.update(id, req);
     }
 

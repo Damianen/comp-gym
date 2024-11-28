@@ -13,22 +13,23 @@ export class ExerciseController {
     }
 
     @Get(':id')
-    getById(@Param(':id') id: string): Promise<IExercise | null> {
+    getById(@Param('id') id: string): Promise<IExercise | null> {
         return this.exerciseService.getById(id);
     }
 
     @Post('')
-    create(@Request() req: any): Promise<IExercise | null> {
+    create(@Body() req: any): Promise<IExercise | null> {
         return this.exerciseService.create(req);
     }
 
     @Put(':id')
-    update(@Param(':id') id: string, @Request() req: any): Promise<IExercise | null> {
+    update(@Param('id') id: string, @Body() req: any): Promise<IExercise | null> {
         return this.exerciseService.update(id, req);
     }
 
     @Delete(':id')
-    delete(@Param(':id') id: string): Promise<null> {
+    delete(@Param('id') id: string): Promise<IExercise | null> {
+        console.log(id);
         return this.exerciseService.delete(id);
     }
 }

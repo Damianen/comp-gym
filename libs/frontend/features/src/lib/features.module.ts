@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { WorkoutDetailComponent } from './workout/workout-detail/workout-detail.component';
 import { WorkoutListComponent } from './workout/workout-list/workout-list.component';
 import { RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { WorkoutService } from './workout/workout.service';
+import { WorkoutEditComponent } from './workout/workout-edit/workout-edit.component';
+import { ExerciseEditComponent } from './exercise/exercise-edit/exercise-edit.component';
+import { ExerciseService } from './exercise/exercise.service';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [WorkoutDetailComponent, WorkoutListComponent],
-  providers: [WorkoutService, provideHttpClient()],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  declarations: [WorkoutDetailComponent, WorkoutListComponent, WorkoutEditComponent, ExerciseEditComponent],
+  providers: [WorkoutService, ExerciseService, provideHttpClient()],
 })
 export class FeaturesModule {}
