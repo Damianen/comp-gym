@@ -46,19 +46,4 @@ export class WorkoutService {
     return this.http.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, workout)
       .pipe(map((response) => response.results))
   }
-
-  createSet(Set: ISet): Observable<ISet> {
-    return this.http.post<ApiResponse<any>>(environment.API_URL + 'set', Set)
-      .pipe(map((response) => response.results));
-  }
-
-  deleteSet(_id: string): Observable<ISet> {
-    return this.http.delete<ApiResponse<any>>(environment.API_URL + 'set/' + _id)
-      .pipe(map((response) => response.results))
-  }
-
-  updateSet(_id: string, Set: IUpdateSet): Observable<ISet> {
-    return this.http.put<ApiResponse<any>>(environment.API_URL + 'set/' + _id, Set)
-      .pipe(map((response) => response.results))
-  }
 }

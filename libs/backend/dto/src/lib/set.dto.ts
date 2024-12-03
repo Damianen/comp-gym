@@ -5,9 +5,6 @@ export class CreateSetDto implements IUpsertSet {
 
     _id!: string;
 
-    @IsNotEmpty()
-    exercise!: IExercise;
-
     @IsNumber()
     @IsNotEmpty()
     reps!: number;

@@ -1,5 +1,5 @@
 import { Controller, Request } from '@nestjs/common';
-import { Get, Param, Post, Body, UseGuards, Put, Delete } from '@nestjs/common';
+import { Get, Param, Post, Body, UseGuards, Put, Delete, Options, HttpCode  } from '@nestjs/common';
 import { WorkoutService } from './workout.service';
 import { IWorkout } from '@comp-gym/shared/api';
 import { WorkoutDto } from '@comp-gym/backend/dto';

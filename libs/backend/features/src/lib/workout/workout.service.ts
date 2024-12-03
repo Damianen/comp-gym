@@ -14,7 +14,7 @@ export class WorkoutService {
     async getAll(): Promise<IWorkout[]> {
         const items = await this.workoutModel
             .find()
-            .populate('sets', 'user')
+            .populate('exercises', 'user')
             .exec();
         return items;
     }
@@ -22,19 +22,17 @@ export class WorkoutService {
     async getById(_id: string): Promise<IWorkout | null> {
         const item = await this.workoutModel
             .findOne({ _id })
-            .populate('sets', 'user')
+            .populate('exercises', 'user')
             .exec();
         return item;
     }
 
     async create(workout: WorkoutDto): Promise<IWorkout> {
-        console.log(workout);
         const createdItem = this.workoutModel.create(workout);
         return createdItem;
     }
 
     async update(_id: string, workout: WorkoutDto): Promise<IWorkout | null> {
-        console.log(workout);
         return this.workoutModel.findByIdAndUpdate({ _id }, workout);
     }
 

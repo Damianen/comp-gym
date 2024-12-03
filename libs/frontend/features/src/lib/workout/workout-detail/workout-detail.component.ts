@@ -11,7 +11,6 @@ import { ExerciseService } from '../../exercise/exercise.service';
 })
 export class WorkoutDetailComponent implements OnInit, OnDestroy {
   workout?: IWorkout;
-  exercises?: IExercise[];
   subscription?: Subscription;
   set?: ISet;
   setTypeList: {
@@ -29,19 +28,6 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
           this.workout = workout;
         })
       });
-
-      this.subscription = this.exerciseService.getExercisesAsync().subscribe((exercises) => {
-        this.exercises = exercises;
-      })
-
-      this.set = {
-        _id: null,
-        exercise: null,
-        reps: 0,
-        duration: 0,
-        weight: 0,
-        type: SetType.Normal
-      }
   }
 
   ngOnDestroy(): void {
@@ -49,9 +35,7 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
   }
 
   createSet(set: ISet): void {
-    this.subscription?.add(this.workoutService.createSet(set).subscribe(() => {
-      this.router.navigate([''], { relativeTo: this.route });
-    }))
+   return;
   }
 
 }

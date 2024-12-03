@@ -1,6 +1,6 @@
-import { ISet } from "./set.interface";
 import { IUser } from './user.interface';
 import { IEntity } from "./Entity.interface";
+import { IExercise } from "./exercise.interface";
 
 export enum WorkoutType {
     Cardio = 'Cardio',
@@ -24,7 +24,7 @@ export interface IWorkoutInfo {
 }
 
 export interface IWorkout extends IWorkoutIdentity, IWorkoutInfo {
-    sets: ISet[] | null;
+    exercises: IExercise[] | null;
 }
 
 export type ICreateWorkout = Pick<IWorkout, 'name' | 'description' | 'type'>;

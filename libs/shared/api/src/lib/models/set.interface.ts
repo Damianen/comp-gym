@@ -9,13 +9,12 @@ export enum SetType {
 }
 
 export interface ISet extends IEntity {
-    exercise: IExercise | null;
     reps: number;
     duration: number;
     weight: number;
     type: SetType;
 }
 
-export type ICreateSet = Pick<ISet, 'reps' | 'weight' | 'duration' | 'type' | 'exercise'>;
+export type ICreateSet = Pick<ISet, 'reps' | 'weight' | 'duration' | 'type'>;
 export type IUpdateSet = Partial<Omit<ISet, 'id'>>;
 export type IUpsertSet = ISet;

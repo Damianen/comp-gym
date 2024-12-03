@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsNumber } from "class-validator"; 
-import { ICreateExercise, IUpdateExercise, IUpsertExercise, ExerciseType, IExercise } from "@comp-gym/shared/api";
+import { ICreateExercise, IUpdateExercise, IUpsertExercise, ExerciseType, ISet } from "@comp-gym/shared/api";
 
 export class CreateExerciseDto implements IUpsertExercise {
 
@@ -20,6 +20,8 @@ export class CreateExerciseDto implements IUpsertExercise {
     @IsString()
     @IsNotEmpty()
     exerciseType!: ExerciseType;
+
+    sets!: ISet[];
 }
 
 export class UpdateExerciseDto implements IUpdateExercise {

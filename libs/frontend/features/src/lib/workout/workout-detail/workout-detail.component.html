@@ -35,21 +35,21 @@
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Reps</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Weight</th>
                   <th class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                    <a routerLink="/exercise/new" class="text-indigo-600 hover:text-indigo-900">Add Workout</a>
+                    <a routerLink="/exercise/new" class="text-indigo-600 hover:text-indigo-900">Add Exercise</a>
                   </th>
                 </tr>
               </thead>
               <tbody class="bg-gray-900">
-                <tr class="border-t border-gray-200" *ngFor="let exercise of exercises">
-                  <th colspan="5" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">{{ exercise.name}}</th>
+                <tr class="border-t border-gray-200" *ngFor="let exercise of workout?.exercises">
+                  <th colspan="5" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">{{ exercise.name }}</th>
                   <td class="bg-gray-700 relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                     <a routerLink="/exercise/edit/{{ exercise._id}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                   </td>
                 </tr>
-                <tr *ngFor="let workoutSet of workout?.sets" class="border-t border-gray-300">
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-3">{{ workoutSet.type }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">{{ workoutSet.reps }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">{{ workoutSet.weight }}</td>
+                <tr *ngFor="let workout of workout?.exercises" class="border-t border-gray-300">
+                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-3"></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200"></td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200"></td>
                   <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                     <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                   </td>

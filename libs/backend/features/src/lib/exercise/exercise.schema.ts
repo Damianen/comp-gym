@@ -22,6 +22,9 @@ export class Exercise implements IExercise {
 
     @Prop({ required: true, type: String, default: ExerciseType.Other})
     exerciseType!: ExerciseType;
+
+    @Prop({ required: false, type: MongooseSchema.Types.ObjectId, ref: 'Set' })
+    sets!: ISet[];
 }
 
 export const ExerciseSchema = SchemaFactory.createForClass(Exercise);

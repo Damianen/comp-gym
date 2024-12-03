@@ -16,12 +16,12 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   constructor(private workoutService: WorkoutService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-      this.subscription = this.workoutService.getWorkoutsAsync().subscribe((workouts) => {
-        workouts.forEach((workout) => {
-          workout.date = new Date(workout.date);
-        })
-        this.workouts = workouts;
+    this.subscription = this.workoutService.getWorkoutsAsync().subscribe((workouts) => {
+      workouts.forEach((workout) => {
+        workout.date = new Date(workout.date);
       })
+      this.workouts = workouts;
+    })
   }
 
   ngOnDestroy(): void {
@@ -29,9 +29,9 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
   }
 
   deleteWorkout(id: string | null): void {
-    this.subscription?.add(this.workoutService.deleteWorkout(String(id)).subscribe(() => {
-      this.router.navigate(['../../workouts'], { relativeTo: this.route })
+    this.subscription = this.workoutService.deleteWorkout(String(id)).subscribe(() => {
+      this.ngOnInit();
     }
-    ))
+    )
   }
 }

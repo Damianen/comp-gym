@@ -34,11 +34,11 @@ export class ExerciseService {
 
   deleteExercise(_id: string): Observable<IExercise> {
     return this.http.delete<ApiResponse<any>>(environment.API_URL + 'exercise/' + _id)
-      .pipe(map((response) => response.results))
+      .pipe(map((response) => response.results));
   }
 
   updateExercise(_id: string, exercise: IUpdateExercise): Observable<IExercise> {
     return this.http.put<ApiResponse<any>>(environment.API_URL + 'exercise/' + _id, exercise)
-      .pipe(map((response) => response.results))
+      .pipe(map((response) => response.results));
   }
 }
