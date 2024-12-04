@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from "@nestjs/mongoose";
 import { Exercise as ExerciseModel, ExerciseDocument } from './exercise.schema';
 import { IExercise } from "@comp-gym/shared/api";
-import { CreateExerciseDto, UpdateExerciseDto } from "@comp-gym/backend/dto";
+import { ExerciseDto } from "@comp-gym/backend/dto";
 
 @Injectable()
 export class ExerciseService {
@@ -25,7 +25,7 @@ export class ExerciseService {
         return item;
     }
 
-    async create(exercise: CreateExerciseDto): Promise<IExercise | null> {
+    async create(exercise: ExerciseDto): Promise<IExercise | null> {
         if (exercise) {
             const createdItem = {
                 ...exercise,
@@ -38,7 +38,7 @@ export class ExerciseService {
         return null;
     }
 
-    async update(_id: string, exercise: UpdateExerciseDto): Promise<IExercise | null> {
+    async update(_id: string, exercise: ExerciseDto): Promise<IExercise | null> {
         return this.exerciseModel.findByIdAndUpdate({ _id }, exercise);
     }
 

@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from "@nestjs/mongoose";
 import { Set as SetModel, SetDocument } from './set.schema';
 import { ISet } from "@comp-gym/shared/api";
-import { CreateSetDto, UpdateSetDto } from "@comp-gym/backend/dto";
+import { SetDto } from "@comp-gym/backend/dto";
 
 @Injectable()
 export class SetService {
@@ -11,14 +11,14 @@ export class SetService {
         @InjectModel(SetModel.name) private setModel: Model<SetDocument>
     ) {}
 
-    async create(set: CreateSetDto): Promise<ISet | null> {
+    async create(set: SetDto): Promise<ISet | null> {
         if (set) {
             return this.setModel.create(set);
         }
         return null;
     }
 
-    async update(_id: string, set: UpdateSetDto): Promise<ISet | null> {
+    async update(_id: string, set: SetDto): Promise<ISet | null> {
         return this.setModel.findByIdAndUpdate({ _id }, set);
     }
 

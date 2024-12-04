@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { IWorkout, WorkoutType, ISet, IUser, IExercise } from '@comp-gym/shared/api';
+import { IWorkout, WorkoutType, ISet, IUser, IExercise, IWorkoutExercise } from '@comp-gym/shared/api';
 import { IsMongoId } from 'class-validator';
 
 export type WorkoutDocument = Workout & Document;
@@ -31,11 +31,21 @@ export class Workout implements IWorkout {
     @Prop({ required: true, type: Boolean, default: false })
     favorite!: boolean;
 
-    @Prop({ required: false, type: MongooseSchema.Types.ObjectId, ref: 'Set'})
-    exercises!: IExercise[];
+    @Prop({ required: false, type: Array, ref: 'Set'})
+    exercises!: WorkoutExercise[];
 
     @Prop({ required: false, type: MongooseSchema.Types.ObjectId, ref: 'User'})
     user!: IUser;
+}
+
+@Schema()
+export class WorkoutExercise implements IWorkoutExercise{
+    
+    @Prop({ required: false, type: MongooseSchema.Types.ObjectId, ref: 'Exercise'})
+    exercise!: IExercise;
+
+    @Prop({ required: false, type: MongooseSchema.Types.ObjectId, ref: 'Set' })
+    sets!: ISet[];
 }
 
 export const WorkoutSchema = SchemaFactory.createForClass(Workout);

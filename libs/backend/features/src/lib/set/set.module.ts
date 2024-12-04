@@ -10,7 +10,6 @@ import { Exercise as ExerciseModel, ExerciseSchema } from '../exercise/exercise.
     imports: [
         MongooseModule.forFeature([
             { name: SetModel.name, schema: SetSchema },
-            { name: ExerciseModel.name, schema: ExerciseSchema },
         ]),
     ],
     controllers: [SetController],

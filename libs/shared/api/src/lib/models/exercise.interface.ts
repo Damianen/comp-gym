@@ -11,15 +11,11 @@ export enum ExerciseType {
     Other = 'Other'
 }
 
-export interface IExerciseIdentity extends IEntity {
+export interface IExercise extends IEntity {
     number: number;
     name: string;
     description: string;
     exerciseType: ExerciseType;
-}
-
-export interface IExercise extends IExerciseIdentity {
-    sets: ISet[] | null;
 }
 
 export type ICreateExercise = Pick<IExercise, 'name' | 'description' | 'exerciseType'>;

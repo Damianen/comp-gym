@@ -27,7 +27,6 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
           name: '',
           description: '',
           number: 0,
-          sets: null,
           exerciseType: ExerciseType.Other,
         })
       } else {
@@ -49,7 +48,6 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
     const Exercise = {
       ...ExerciseInfo,
       number: Math.random() * 10000000,
-      sets: null,
     }
 
     if (this.exerciseId) {

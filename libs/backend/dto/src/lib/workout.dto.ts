@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsBoolean, IsOptional, IsDate, IsNumber } from "class-validator"; 
-import { ICreateWorkout, IExercise, IUpdateWorkout, IUpsertWorkout, IUser, IWorkout, IWorkoutIdentity, WorkoutType } from "@comp-gym/shared/api";
+import { IExercise, IUser, IWorkout, IWorkoutExercise, WorkoutType } from "@comp-gym/shared/api";
 
 export class WorkoutDto implements IWorkout {
 
@@ -33,7 +33,8 @@ export class WorkoutDto implements IWorkout {
     @IsNotEmpty()
     favorite!: boolean;
 
-    exercises!: IExercise[];
+    exercises!: IWorkoutExercise[];
 
     user!: IUser;
 }
+

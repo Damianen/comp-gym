@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsString, IsNumber } from "class-validator"; 
-import { ICreateExercise, IUpdateExercise, IUpsertExercise, ExerciseType, ISet } from "@comp-gym/shared/api";
+import { ExerciseType, IExercise } from "@comp-gym/shared/api";
 
-export class CreateExerciseDto implements IUpsertExercise {
+export class ExerciseDto implements IExercise {
 
     _id!: string;
 
@@ -9,22 +9,6 @@ export class CreateExerciseDto implements IUpsertExercise {
     @IsNotEmpty()
     number!: number;
 
-    @IsString()
-    @IsNotEmpty()
-    name!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    description!: string;
-
-    @IsString()
-    @IsNotEmpty()
-    exerciseType!: ExerciseType;
-
-    sets!: ISet[];
-}
-
-export class UpdateExerciseDto implements IUpdateExercise {
     @IsString()
     @IsNotEmpty()
     name!: string;

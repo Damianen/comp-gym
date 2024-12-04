@@ -41,9 +41,9 @@
               </thead>
               <tbody class="bg-gray-900">
                 <tr class="border-t border-gray-200" *ngFor="let exercise of workout?.exercises">
-                  <th colspan="5" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">{{ exercise.name }}</th>
+                  <th colspan="5" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">{{ exercise }}</th>
                   <td class="bg-gray-700 relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                    <a routerLink="/exercise/edit/{{ exercise._id}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    <a routerLink="/exercise/edit/{{ exercise}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
                   </td>
                 </tr>
                 <tr *ngFor="let workout of workout?.exercises" class="border-t border-gray-300">

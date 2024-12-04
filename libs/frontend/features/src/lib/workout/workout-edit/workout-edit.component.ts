@@ -50,7 +50,7 @@ export class WorkoutEditComponent implements OnInit, OnDestroy {
       date: new Date(),
       favorite: false,
       user: null,
-      exercises: null,
+      exercises: [],
     }
 
     if (this.workoutId) {
