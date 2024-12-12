@@ -43,7 +43,6 @@ export class ExerciseService {
     }
 
     async delete(_id: string): Promise<IExercise | null> {
-        console.log(_id);
         return this.exerciseModel.findByIdAndDelete({ _id });
     }
 }

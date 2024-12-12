@@ -2,13 +2,15 @@ import { HttpException, Injectable } from "@nestjs/common";
 import { Model } from 'mongoose';
 import { InjectModel } from "@nestjs/mongoose";
 import { Workout as WorkoutModel, WorkoutDocument } from './workout.schema';
-import { IWorkout } from "@comp-gym/shared/api";
+import { IWorkout, IExercise, ISet } from "@comp-gym/shared/api";
 import { WorkoutDto } from "@comp-gym/backend/dto";
+import { ExerciseService } from "../exercise/exercise.service";
 
 @Injectable()
 export class WorkoutService {
     constructor(
-        @InjectModel(WorkoutModel.name) private workoutModel: Model<WorkoutDocument>
+        @InjectModel(WorkoutModel.name) private workoutModel: Model<WorkoutDocument>,
+        private exerciseService: ExerciseService,
     ) {}
 
     async getAll(): Promise<IWorkout[]> {
@@ -38,5 +40,55 @@ export class WorkoutService {
 
     async delete(_id: string): Promise<IWorkout | null> {
         return this.workoutModel.findByIdAndDelete({ _id });
+    }
+
+    async addExercise(_id: string, exerciseId: string): Promise<IWorkout | null> {
+        const workout = await this.workoutModel
+            .findOne({ _id })
+            .populate('exercises', 'user')
+            .exec();
+
+        const exercise = await this.exerciseService.getById(exerciseId) as IExercise;
+
+        workout?.exercises.push({
+            exercise: exercise,
+            sets: [],
+        })
+
+        return this.workoutModel.findByIdAndUpdate({ _id }, workout as WorkoutDto);
+
+    }
+
+    async removeExercise(_id: string, exerciseIndex: number): Promise<IWorkout | null> {
+        const workout = await this.workoutModel
+            .findOne({ _id })
+            .populate('exercises', 'user')
+            .exec();
+        
+        workout?.exercises.splice(exerciseIndex, 1);
+
+        return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
+    }
+
+    async addSet(_id: string, exerciseIndex: number, set: ISet): Promise<IWorkout | null> {
+        const workout = await this.workoutModel
+            .findOne({ _id })
+            .populate('exercises', 'user')
+            .exec();
+        
+        workout?.exercises[exerciseIndex].sets.push(set);
+
+        return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
+    }
+
+    async deleteSet(_id: string, exerciseIndex: number, setIndex: number): Promise<IWorkout | null> {
+        const workout = await this.workoutModel
+            .findOne({ _id })
+            .populate('exercises', 'user')
+            .exec();
+
+        workout?.exercises[exerciseIndex].sets.splice(setIndex, 1);
+
+        return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
     }
 }

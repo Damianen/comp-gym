@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { User as UserModel, UserSchema } from '@comp-gym/backend/user';
 import { Workout as WorkoutModel, WorkoutSchema } from './workout.schema';
 import { Exercise as ExerciseModel, ExerciseSchema } from '../exercise/exercise.schema';
+import { ExerciseService } from '../exercise/exercise.service';
 
 
 @Module({
@@ -12,11 +13,11 @@ import { Exercise as ExerciseModel, ExerciseSchema } from '../exercise/exercise.
         MongooseModule.forFeature([
             { name: WorkoutModel.name, schema: WorkoutSchema },
             { name: UserModel.name, schema: UserSchema },
-            { name: ExerciseModel.name, schema: ExerciseSchema }
+            { name: ExerciseModel.name, schema: ExerciseSchema },
         ]),
     ],
     controllers: [WorkoutController],
-    providers: [WorkoutService],
+    providers: [WorkoutService, ExerciseService],
     exports: [WorkoutService]
 })
 export class WorkoutModule {}

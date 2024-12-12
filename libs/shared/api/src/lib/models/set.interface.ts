@@ -1,6 +1,3 @@
-import { IExercise } from "./exercise.interface";
-import { IEntity } from "./Entity.interface";
-
 export enum SetType {
     Drop = 'Drop',
     Super = 'Super',
@@ -8,7 +5,7 @@ export enum SetType {
     Normal = 'Normal'
 }
 
-export interface ISet extends IEntity {
+export interface ISet {
     reps: number;
     duration: number;
     weight: number;

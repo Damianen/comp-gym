@@ -26,6 +26,14 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
         this.subscription = this.workoutService.getWorkoutById(String(workoutId)).subscribe((workout) => {
           workout.date = new Date(workout.date);
           this.workout = workout;
+          if (!this.set) {
+            this.set = {
+                type: SetType.Normal,
+                reps: 0,
+                duration: 0,
+                weight: 0
+              }
+          }
         })
       });
   }
@@ -34,8 +42,22 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 
-  createSet(set: ISet): void {
-   return;
+  deleteExercise(exerciseIndex: number | undefined): void {
+    this.subscription = this.workoutService.deleteExerciseFromWorkout(this.workout?._id as string, exerciseIndex as number).subscribe(() => { 
+      this.ngOnInit() 
+    });
+  }
+
+  createSet(set: ISet, exerciseIndex: number | undefined): void {
+    this.subscription = this.workoutService.addSetToWorkout(this.workout?._id as string, set, exerciseIndex as number).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
+  deleteSet(exerciseIndex: number | undefined, setIndex: number | undefined): void {
+    this.subscription = this.workoutService.deleteSetFromWorkout(this.workout?._id as string, exerciseIndex as number, setIndex as number).subscribe(() => {
+      this.ngOnInit();
+    })
   }
 
 }

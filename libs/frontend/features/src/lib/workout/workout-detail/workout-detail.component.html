@@ -28,56 +28,119 @@
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+            @if (this.workout?.exercises?.length !== 0) {
+            <div *ngFor="let exercise of workout?.exercises">
+              <form *ngIf="set" #setEditFrom="ngForm" (ngSubmit)="setEditFrom.form.valid && createSet(set, workout?.exercises?.indexOf(exercise))" novalidate >
+                <table class="min-w-full">
+                  @if (workout?.exercises?.indexOf(exercise) === 0) {
+                  <thead class="bg-gray-900">
+                    <tr>
+                      <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">Type</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Weight</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Duration</th>
+                      <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Reps</th>
+                      <th scope="col" class="relative py-3.5 pl-3 pr-4 text-sm font-medium sm:pr-3 text-right">
+                        <a routerLink="./exercise/add" class="text-indigo-600 hover:text-indigo-900">Add Exercise</a>
+                      </th>
+                    </tr>
+                  </thead>
+                  } @else {
+                    <thead class="bg-gray-900">
+                      <tr>
+                        <th scope="col" class="pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-3">Type</th>
+                        <th scope="col" class="px-3 text-left text-sm font-semibold text-gray-900">Weight</th>
+                        <th scope="col" class="px-3 text-left text-sm font-semibold text-gray-900">Duration</th>
+                        <th scope="col" class="px-3 text-left text-sm font-semibold text-gray-900">Reps</th>
+                        <th scope="col" class="relative pl-3 pr-4 text-sm font-medium sm:pr-3 text-right">
+                          <a routerLink="./exercise/add" class="text-gray-900">Add Exercise</a>
+                        </th>
+                      </tr>
+                    </thead>
+                  }
+                  <tbody class="bg-gray-900">
+                    <tr class="border-t border-gray-200">
+                      <th colspan="4" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold sm:pl-3">
+                        <a routerLink="./exercise/edit/{{ exercise.exercise._id }}" class="text-indigo-600 hover:text-indigo-900">{{ exercise.exercise.name }}</a>
+                      </th>
+                      <th colspan="1" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-right text-sm font-semibold sm:pl-3">
+                        <form><button (click)="deleteExercise(this.workout?.exercises?.indexOf(exercise))" class="rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">delete</button></form>
+                      </th>
+                    </tr>
+                    <tr *ngFor="let set of exercise.sets" class="border-t border-gray-200">
+                      <td class="whitespace-nowrap px-4 pl-4 pr-3 text-sm text-white sm:pl-3">{{ set.type }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">{{ set.reps }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">{{ set.duration }} min</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">{{ set.weight }} KG</td>
+                      <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
+                        <form><button (click)="deleteSet(this.workout?.exercises?.indexOf(exercise), exercise.sets.indexOf(set))" href="#" class="text-indigo-600 hover:text-indigo-900">delete</button></form>
+                      </td>
+                    </tr>
+                    <tr class="border-t border-gray-200">
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">
+                        <select #userTitle="ngModel" [(ngModel)]="set.type" required id="location" name="location" class="text-white w-full rounded-md py-2 pl-2 pr-12 bg-gray-700 sm:text-sm/6">
+                          <option *ngFor="let type of setTypeList">{{ type.value }}</option>
+                        </select>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">
+                        <div class="relative  rounded-md shadow-sm">
+                          <input #userTitle="ngModel" [(ngModel)]="set.weight" required type="number" name="price" class="text-white w-full rounded-md py-1.5 pl-2 pr-12 bg-gray-700 placeholder:text-gray-400 sm:text-sm/6" aria-describedby="price-currency">
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <span class="text-gray-200 sm:text-sm" id="price-currency">KG</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">
+                        <div class="relative  rounded-md shadow-sm">
+                          <input #userTitle="ngModel" [(ngModel)]="set.duration" required type="number" name="price" class="text-white w-full rounded-md py-1.5 pl-2 pr-12 bg-gray-700 placeholder:text-gray-400 sm:text-sm/6" aria-describedby="price-currency">
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <span class="text-gray-200 sm:text-sm" id="price-currency">Sec</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200">
+                        <div class="relative  rounded-md shadow-sm">
+                          <input #userTitle="ngModel" [(ngModel)]="set.reps" required type="number" name="price" class="text-white w-full rounded-md py-1.5 pl-2 pr-12 bg-gray-700 placeholder:text-gray-400 sm:text-sm/6" aria-describedby="price-currency">
+                          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                            <span class="text-gray-200 sm:text-sm" id="price-currency">Reps</span>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200 text-right">
+                        <button class="rounded-md bg-indigo-500 px-3 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">add</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          }
+          @else {
             <table class="min-w-full">
               <thead class="bg-gray-900">
                 <tr>
                   <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">Type</th>
-                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Reps</th>
                   <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Weight</th>
-                  <th class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                    <a routerLink="/exercise/new" class="text-indigo-600 hover:text-indigo-900">Add Exercise</a>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Duration</th>
+                  <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-white">Reps</th>
+                  <th scope="col" class="relative py-3.5 pl-3 pr-4 text-sm font-medium sm:pr-3 text-right">
+                    <a routerLink="./exercise/add" class="text-indigo-600 hover:text-indigo-900">Add Exercise</a>
                   </th>
                 </tr>
               </thead>
               <tbody class="bg-gray-900">
-                <tr class="border-t border-gray-200" *ngFor="let exercise of workout?.exercises">
-                  <th colspan="5" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold text-white sm:pl-3">{{ exercise }}</th>
-                  <td class="bg-gray-700 relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                    <a routerLink="/exercise/edit/{{ exercise}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                  </td>
-                </tr>
-                <tr *ngFor="let workout of workout?.exercises" class="border-t border-gray-300">
-                  <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-white sm:pl-3"></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200"></td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-200"></td>
-                  <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                  </td>
+                <tr class="border-t border-gray-200">
+                  <th colspan="5" scope="colgroup" class=" bg-gray-700 py-2 pl-4 pr-3 text-left text-sm font-semibold sm:pl-3">
+                    <a class="text-white">No exercises yet</a>
+                  </th>
                 </tr>
               </tbody>
             </table>
+          }
           </div>
         </div>
       </div>
 
-        <form class="hidden relative flex gap-2" *ngIf="set" #setEditFrom="ngForm" (ngSubmit)="setEditFrom.form.valid && createSet(set)" novalidate>
-          <select #userTitle="ngModel" [(ngModel)]="set.type" required id="location" name="location" class="text-white w-44 mt-2 block rounded-md border-0 py-1.5 pl-3 pr-10 bg-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm/6">
-            <option *ngFor="let type of setTypeList">{{ type.value }}</option>
-          </select>
-          <div class="relative mt-2 rounded-md shadow-sm">
-            <input #userTitle="ngModel" [(ngModel)]="set.weight" required type="number" name="price" id="price" class="text-white block w-full rounded-md border-0 py-1.5 pl-2 pr-12 bg-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" aria-describedby="price-currency">
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-              <span class="text-gray-200 sm:text-sm" id="price-currency">KG</span>
-            </div>
-          </div>
-          <div class="relative mt-2 rounded-md shadow-sm">
-            <input #userTitle="ngModel" [(ngModel)]="set.reps" required type="number" name="price" id="price" class="text-white block w-full rounded-md border-0 py-1.5 pl-2 pr-12 bg-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6" aria-describedby="price-currency">
-            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-              <span class="text-gray-200 sm:text-sm" id="price-currency">Reps</span>
-            </div>
-          </div>
-          <button class="rounded-md bg-indigo-500 px-3 py-1.5 mt-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">add</button>
-        </form>
+        
     </div>
 </main>
   

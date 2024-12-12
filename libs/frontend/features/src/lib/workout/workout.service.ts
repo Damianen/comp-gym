@@ -39,11 +39,26 @@ export class WorkoutService {
 
   deleteWorkout(_id: string): Observable<IWorkout> {
     return this.http.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
-      .pipe(map((response) => response.results))
+      .pipe(map((response) => response.results));
   }
 
   updateWorkout(_id: string, workout: IUpdateWorkout): Observable<IWorkout> {
     return this.http.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, workout)
-      .pipe(map((response) => response.results))
+      .pipe(map((response) => response.results));
+  }
+
+  deleteExerciseFromWorkout(_id: string, exerciseIndex: number): Observable<IWorkout> {
+    return this.http.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/exercise/' + exerciseIndex)
+      .pipe(map((response) => response.results));
+  }
+
+  addSetToWorkout(_id: string, set: ISet, exerciseIndex: number): Observable<IWorkout> {
+    return this.http.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex, set)
+      .pipe(map((response) => response.results));
+  }
+
+  deleteSetFromWorkout(_id: string, exerciseIndex: number, setIndex: number): Observable<IWorkout> {
+    return this.http.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex + '/' + setIndex)
+      .pipe(map((response) => response.results));
   }
 }

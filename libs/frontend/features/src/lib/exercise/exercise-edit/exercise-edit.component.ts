@@ -21,7 +21,7 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.route.paramMap.pipe(switchMap((params: ParamMap) => {
-      if (!params.get('id')) {
+      if (!params.get('exerciseId')) {
         return of({
           _id: null,
           name: '',
@@ -30,8 +30,8 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
           exerciseType: ExerciseType.Other,
         })
       } else {
-        this.exerciseId = String(params.get('id'));
-        return this.exerciseService.getExerciseById(String(params.get('id')));
+        this.exerciseId = String(params.get('exerciseId'));
+        return this.exerciseService.getExerciseById(String(params.get('exerciseId')));
       }
     })).subscribe((exercise) => {
       this.exercise = exercise;
@@ -52,18 +52,18 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 
     if (this.exerciseId) {
       this.sub?.add(this.exerciseService.updateExercise(this.exerciseId, Exercise).subscribe(() => {
-        this.router.navigate(['../../' + this.exerciseId], { relativeTo: this.route });
+        this.router.navigate(['../add' + this.exerciseId], { relativeTo: this.route });
       }))
     } else {
       this.sub?.add(this.exerciseService.createExercise({...Exercise, _id: null}).subscribe(() => {
-        this.router.navigate(['../../Exercises'], { relativeTo: this.route });
+        this.router.navigate(['../add'], { relativeTo: this.route });
       }))
     }
   }
 
   deleteExercise() {
     this.sub?.add(this.exerciseService.deleteExercise(String(this.exerciseId)).subscribe(() => {
-      this.router.navigate(['../../../workouts'], { relativeTo: this.route })
+      this.router.navigate(['../add'], { relativeTo: this.route })
     }))
   }
 }

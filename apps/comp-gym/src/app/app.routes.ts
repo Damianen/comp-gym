@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import { WorkoutDetailComponent, WorkoutListComponent, WorkoutEditComponent, ExerciseEditComponent } from '@comp-gym/frontend/features';
+import { WorkoutDetailComponent, WorkoutListComponent, WorkoutEditComponent, ExerciseEditComponent, ExerciseListComponent } from '@comp-gym/frontend/features';
 
 export const appRoutes: Route[] = [
     { path: '', component: HomeComponent },
@@ -10,10 +10,9 @@ export const appRoutes: Route[] = [
     { path: 'workout/new', component: WorkoutEditComponent },
     { path: 'workout/edit/:id', component: WorkoutEditComponent },
     { path: 'workout/:id', component: WorkoutDetailComponent },
-    { path: 'exercise/new', component: ExerciseEditComponent },
-    { path: 'exercise/edit/:id', component: ExerciseEditComponent },
-    
-    
+    { path: 'workout/:id/exercise/add', component: ExerciseListComponent },
+    { path: 'workout/:id/exercise/new', component: ExerciseEditComponent },
+    { path: 'workout/:id/exercise/edit/:exerciseId', component: ExerciseEditComponent },
 
     { path: '**', redirectTo: '' }
 ];

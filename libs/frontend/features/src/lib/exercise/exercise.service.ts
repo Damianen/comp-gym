@@ -5,6 +5,7 @@ import {
   IUpdateExercise,
   IExercise,
   ExerciseType,
+  IWorkout,
 } from '@comp-gym/shared/api';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@comp-gym/shared/util-env';
@@ -39,6 +40,11 @@ export class ExerciseService {
 
   updateExercise(_id: string, exercise: IUpdateExercise): Observable<IExercise> {
     return this.http.put<ApiResponse<any>>(environment.API_URL + 'exercise/' + _id, exercise)
+      .pipe(map((response) => response.results));
+  }
+
+  addExerciseToWorkout(_id: string, workoutId: string): Observable<IWorkout> {
+    return this.http.put<ApiResponse<any>>(environment.API_URL + 'workout/' + workoutId + '/exercise/' + _id, null)
       .pipe(map((response) => response.results));
   }
 }
