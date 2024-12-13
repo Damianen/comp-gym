@@ -1,15 +1,15 @@
 export enum SetType {
-    Drop = 'Drop',
-    Super = 'Super',
-    WarmUp = 'WarmUp',
-    Normal = 'Normal'
+	Drop = 'Drop',
+	Super = 'Super',
+	WarmUp = 'WarmUp',
+	Normal = 'Normal',
 }
 
 export interface ISet {
-    reps: number;
-    duration: number;
-    weight: number;
-    type: SetType;
+	reps: number;
+	duration: number;
+	weight: number;
+	type: SetType;
 }
 
 export type ICreateSet = Pick<ISet, 'reps' | 'weight' | 'duration' | 'type'>;

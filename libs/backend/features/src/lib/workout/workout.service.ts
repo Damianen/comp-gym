@@ -1,94 +1,76 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
-import { InjectModel } from "@nestjs/mongoose";
+import { InjectModel } from '@nestjs/mongoose';
 import { Workout as WorkoutModel, WorkoutDocument } from './workout.schema';
-import { IWorkout, IExercise, ISet } from "@comp-gym/shared/api";
-import { WorkoutDto } from "@comp-gym/backend/dto";
-import { ExerciseService } from "../exercise/exercise.service";
+import { IWorkout, IExercise, ISet } from '@comp-gym/shared/api';
+import { WorkoutDto } from '@comp-gym/backend/dto';
+import { ExerciseService } from '../exercise/exercise.service';
 
 @Injectable()
 export class WorkoutService {
-    constructor(
-        @InjectModel(WorkoutModel.name) private workoutModel: Model<WorkoutDocument>,
-        private exerciseService: ExerciseService,
-    ) {}
+	constructor(
+		@InjectModel(WorkoutModel.name)
+		private workoutModel: Model<WorkoutDocument>,
+		private exerciseService: ExerciseService
+	) {}
 
-    async getAll(): Promise<IWorkout[]> {
-        const items = await this.workoutModel
-            .find()
-            .populate('exercises', 'user')
-            .exec();
-        return items;
-    }
+	async getAll(): Promise<IWorkout[]> {
+		const items = await this.workoutModel.find().populate('exercises', 'user').exec();
+		return items;
+	}
 
-    async getById(_id: string): Promise<IWorkout | null> {
-        const item = await this.workoutModel
-            .findOne({ _id })
-            .populate('exercises', 'user')
-            .exec();
-        return item;
-    }
+	async getById(_id: string): Promise<IWorkout | null> {
+		const item = await this.workoutModel.findOne({ _id }).populate('exercises', 'user').exec();
+		return item;
+	}
 
-    async create(workout: WorkoutDto): Promise<IWorkout> {
-        const createdItem = this.workoutModel.create(workout);
-        return createdItem;
-    }
+	async create(workout: WorkoutDto): Promise<IWorkout> {
+		const createdItem = this.workoutModel.create(workout);
+		return createdItem;
+	}
 
-    async update(_id: string, workout: WorkoutDto): Promise<IWorkout | null> {
-        return this.workoutModel.findByIdAndUpdate({ _id }, workout);
-    }
+	async update(_id: string, workout: WorkoutDto): Promise<IWorkout | null> {
+		return this.workoutModel.findByIdAndUpdate({ _id }, workout);
+	}
 
-    async delete(_id: string): Promise<IWorkout | null> {
-        return this.workoutModel.findByIdAndDelete({ _id });
-    }
+	async delete(_id: string): Promise<IWorkout | null> {
+		return this.workoutModel.findByIdAndDelete({ _id });
+	}
 
-    async addExercise(_id: string, exerciseId: string): Promise<IWorkout | null> {
-        const workout = await this.workoutModel
-            .findOne({ _id })
-            .populate('exercises', 'user')
-            .exec();
+	async addExercise(_id: string, exerciseId: string): Promise<IWorkout | null> {
+		const workout = await this.workoutModel.findOne({ _id }).populate('exercises', 'user').exec();
 
-        const exercise = await this.exerciseService.getById(exerciseId) as IExercise;
+		const exercise = (await this.exerciseService.getById(exerciseId)) as IExercise;
 
-        workout?.exercises.push({
-            exercise: exercise,
-            sets: [],
-        })
+		workout?.exercises.push({
+			exercise: exercise,
+			sets: [],
+		});
 
-        return this.workoutModel.findByIdAndUpdate({ _id }, workout as WorkoutDto);
+		return this.workoutModel.findByIdAndUpdate({ _id }, workout as WorkoutDto);
+	}
 
-    }
+	async removeExercise(_id: string, exerciseIndex: number): Promise<IWorkout | null> {
+		const workout = await this.workoutModel.findOne({ _id }).populate('exercises', 'user').exec();
 
-    async removeExercise(_id: string, exerciseIndex: number): Promise<IWorkout | null> {
-        const workout = await this.workoutModel
-            .findOne({ _id })
-            .populate('exercises', 'user')
-            .exec();
-        
-        workout?.exercises.splice(exerciseIndex, 1);
+		workout?.exercises.splice(exerciseIndex, 1);
 
-        return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
-    }
+		return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
+	}
 
-    async addSet(_id: string, exerciseIndex: number, set: ISet): Promise<IWorkout | null> {
-        const workout = await this.workoutModel
-            .findOne({ _id })
-            .populate('exercises', 'user')
-            .exec();
-        
-        workout?.exercises[exerciseIndex].sets.push(set);
+	async addSet(_id: string, exerciseIndex: number, set: ISet): Promise<IWorkout | null> {
+		const workout = await this.workoutModel.findOne({ _id }).populate('exercises', 'user').exec();
 
-        return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
-    }
+		workout?.exercises[exerciseIndex].sets.push(set);
 
-    async deleteSet(_id: string, exerciseIndex: number, setIndex: number): Promise<IWorkout | null> {
-        const workout = await this.workoutModel
-            .findOne({ _id })
-            .populate('exercises', 'user')
-            .exec();
+		return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
+	}
 
-        workout?.exercises[exerciseIndex].sets.splice(setIndex, 1);
+	async deleteSet(_id: string, exerciseIndex: number, setIndex: number): Promise<IWorkout | null> {
+		const workout = await this.workoutModel.findOne({ _id }).populate('exercises', 'user').exec();
 
-        return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
-    }
+		workout?.exercises[exerciseIndex].sets.splice(setIndex, 1);
+
+		return this.workoutModel.findByIdAndUpdate({ _id }, workout as IWorkout);
+	}
 }

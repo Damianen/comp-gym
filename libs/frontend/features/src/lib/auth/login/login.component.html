@@ -1,0 +1,116 @@
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+	<div class="sm:mx-auto sm:w-full sm:max-w-sm">
+		<img class="mx-auto h-16 w-auto" src="logo.png" alt="Your Company" />
+		<h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Login to your account</h2>
+	</div>
+
+	<div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+		<form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+			<div>
+				<label for="email" class="block text-sm/6 font-medium text-white">Email address</label>
+				<div class="mt-2">
+					<input
+						type="email"
+						formControlName="email"
+						id="inputEmail"
+						aria-describedby="emailHelp"
+						[ngClass]="{
+							'is-invalid': loginForm.get('email')!.invalid && loginForm.get('email')!.touched,
+						}"
+						class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+					/>
+					<div
+						class="rounded-md pt-2"
+						*ngIf="!loginForm.get('email')!.valid && loginForm.get('email')!.touched"
+					>
+						<div class="flex">
+							<div class="shrink-0">
+								<svg
+									class="size-5 text-red-500"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+									aria-hidden="true"
+									data-slot="icon"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+							</div>
+							<div class="ml-3">
+								<h3 class="text-sm font-medium text-red-500">Enter a valid email</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div class="flex items-center justify-between">
+					<label for="password" class="block text-sm/6 font-medium text-white">Password</label>
+					<div class="text-sm">
+						<a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300 hidden"
+							>Forgot password?</a
+						>
+					</div>
+				</div>
+				<div class="mt-2">
+					<input
+						type="password"
+						formControlName="password"
+						id="inputPassword"
+						[ngClass]="{
+							'is-invalid': loginForm.get('password')!.invalid && loginForm.get('password')!.touched,
+						}"
+						class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+					/>
+					<div
+						class="rounded-md pt-2"
+						*ngIf="!loginForm.get('password')!.valid && loginForm.get('password')!.touched"
+					>
+						<div class="flex">
+							<div class="shrink-0">
+								<svg
+									class="size-5 text-red-500"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+									aria-hidden="true"
+									data-slot="icon"
+								>
+									<path
+										fill-rule="evenodd"
+										d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+										clip-rule="evenodd"
+									/>
+								</svg>
+							</div>
+							<div class="ml-3">
+								<h3 class="text-sm font-medium text-red-500">Enter a valid email</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<button
+					id="submitbutton"
+					type="submit"
+					[disabled]="!loginForm.valid && !submitted"
+					class="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+				>
+					Login
+				</button>
+			</div>
+		</form>
+
+		<p class="mt-10 text-center text-sm/6 text-gray-400">
+			Not a member?
+			<a routerLink="/signup" class="font-semibold text-indigo-400 hover:text-indigo-300"
+				>Make your account here</a
+			>
+		</p>
+	</div>
+</div>

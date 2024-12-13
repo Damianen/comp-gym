@@ -1,245 +1,619 @@
 <div class="relative isolate overflow-hidden bg-gray-900">
-    <svg class="absolute inset-0 -z-10 size-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]" aria-hidden="true">
-      <defs>
-        <pattern id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc" width="200" height="200" x="50%" y="-1" patternUnits="userSpaceOnUse">
-          <path d="M.5 200V.5H200" fill="none" />
-        </pattern>
-      </defs>
-      <svg x="50%" y="-1" class="overflow-visible fill-gray-800/20">
-        <path d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z" stroke-width="0" />
-      </svg>
-      <rect width="100%" height="100%" stroke-width="0" fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)" />
-    </svg>
-    <div class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]" aria-hidden="true">
-      <div class="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20" style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"></div>
-    </div>
-    <div class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
-      <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
-        <div class="mt-24 sm:mt-32 lg:mt-16">
-          <a href="#" class="inline-flex space-x-6">
-            <span class="rounded-full bg-indigo-500/10 px-3 py-1 text-sm/6 font-semibold text-indigo-400 ring-1 ring-inset ring-indigo-500/20">What's new</span>
-            <span class="inline-flex items-center space-x-2 text-sm/6 font-medium text-gray-300">
-              <span>Just shipped v1.0</span>
-              <svg class="size-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-              </svg>
-            </span>
-          </a>
-        </div>
-        <h1 class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-white sm:text-7xl">Track your workouts with confidence</h1>
-        <p class="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">A gym web app that helps users track their workouts, create exercise templates, and monitor progress to achieve their fitness goals efficiently.</p>
-        <div class="mt-10 flex items-center gap-x-6">
-          <a routerLink="/workouts" class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400">Get started</a>
-          <a routerLink="/about" class="text-sm/6 font-semibold text-white">Learn more <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <div class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32">
-        <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-          <img src="https://tailwindui.com/plus/img/component-images/dark-project-app-screenshot.png" alt="App screenshot" width="2432" height="1442" class="w-[76rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10">
-        </div>
-      </div>
-    </div>
+	<svg
+		class="absolute inset-0 -z-10 size-full stroke-white/10 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)]"
+		aria-hidden="true"
+	>
+		<defs>
+			<pattern
+				id="983e3e4c-de6d-4c3f-8d64-b9761d1534cc"
+				width="200"
+				height="200"
+				x="50%"
+				y="-1"
+				patternUnits="userSpaceOnUse"
+			>
+				<path d="M.5 200V.5H200" fill="none" />
+			</pattern>
+		</defs>
+		<svg x="50%" y="-1" class="overflow-visible fill-gray-800/20">
+			<path
+				d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
+				stroke-width="0"
+			/>
+		</svg>
+		<rect
+			width="100%"
+			height="100%"
+			stroke-width="0"
+			fill="url(#983e3e4c-de6d-4c3f-8d64-b9761d1534cc)"
+		/>
+	</svg>
+	<div
+		class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"
+		aria-hidden="true"
+	>
+		<div
+			class="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-[#80caff] to-[#4f46e5] opacity-20"
+			style="
+				clip-path: polygon(
+					73.6% 51.7%,
+					91.7% 11.8%,
+					100% 46.4%,
+					97.4% 82.2%,
+					92.5% 84.9%,
+					75.7% 64%,
+					55.3% 47.5%,
+					46.5% 49.4%,
+					45% 62.9%,
+					50.3% 87.2%,
+					21.3% 64.1%,
+					0.1% 100%,
+					5.4% 51.1%,
+					21.4% 63.9%,
+					58.9% 0.2%,
+					73.6% 51.7%
+				);
+			"
+		></div>
+	</div>
+	<div
+		class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40"
+	>
+		<div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
+			<div class="mt-24 sm:mt-32 lg:mt-16">
+				<a href="#" class="inline-flex space-x-6">
+					<span
+						class="rounded-full bg-indigo-500/10 px-3 py-1 text-sm/6 font-semibold text-indigo-400 ring-1 ring-inset ring-indigo-500/20"
+						>What's new</span
+					>
+					<span
+						class="inline-flex items-center space-x-2 text-sm/6 font-medium text-gray-300"
+					>
+						<span>Just shipped v1.0</span>
+						<svg
+							class="size-5 text-gray-500"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+					</span>
+				</a>
+			</div>
+			<h1
+				class="mt-10 text-pretty text-5xl font-semibold tracking-tight text-white sm:text-7xl"
+			>
+				Track your workouts with confidence
+			</h1>
+			<p
+				class="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8"
+			>
+				A gym web app that helps users track their workouts, create
+				exercise templates, and monitor progress to achieve their
+				fitness goals efficiently.
+			</p>
+			<div class="mt-10 flex items-center gap-x-6">
+				<a
+					routerLink="/workouts"
+					class="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+					>Get started</a
+				>
+				<a
+					routerLink="/about"
+					class="text-sm/6 font-semibold text-white"
+					>Learn more <span aria-hidden="true">→</span></a
+				>
+			</div>
+		</div>
+		<div
+			class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32"
+		>
+			<div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+				<img
+					src="https://tailwindui.com/plus/img/component-images/dark-project-app-screenshot.png"
+					alt="App screenshot"
+					width="2432"
+					height="1442"
+					class="w-[76rem] rounded-md bg-white/5 shadow-2xl ring-1 ring-white/10"
+				/>
+			</div>
+		</div>
+	</div>
 </div>
 
-  <div class="bg-gray-900 py-24 sm:py-32">
-    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-      <h2 class="text-base/7 font-semibold text-indigo-400">Workout more effectively</h2>
-      <p class="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl">Everything you need to track your workouts</p>
-      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-        <div class="flex p-px lg:col-span-4">
-          <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]">
-            <img class="h-80 object-cover object-left" src="https://tailwindui.com/plus/img/component-images/bento-02-releases.png" alt="">
-            <div class="p-10">
-              <h3 class="text-sm/4 font-semibold text-gray-400">Workouts</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Create your own custom workouts</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">You can design personalized workouts by naming them and adding a structured list of exercises.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex p-px lg:col-span-2">
-          <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-[2rem]">
-            <img class="h-80 object-cover" src="https://tailwindui.com/plus/img/component-images/bento-02-integrations.png" alt="">
-            <div class="p-10">
-              <h3 class="text-sm/4 font-semibold text-gray-400">Exercises</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Create your own custom exercises</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">You can build exercises from scratch or use templates, including details like muscle groups, descriptions, and default parameters.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex p-px lg:col-span-2">
-          <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem]">
-            <img class="h-80 object-cover" src="https://tailwindui.com/plus/img/component-images/bento-02-security.png" alt="">
-            <div class="p-10">
-              <h3 class="text-sm/4 font-semibold text-gray-400">Sets</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Track your sets</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">You can log sets for each exercise, specifying repetitions, weights, and other metrics to track performance accurately.</p>
-            </div>
-          </div>
-        </div>
-        <div class="flex p-px lg:col-span-4">
-          <div class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]">
-            <img class="h-80 object-cover object-left" src="https://tailwindui.com/plus/img/component-images/bento-02-performance.png" alt="">
-            <div class="p-10">
-              <h3 class="text-sm/4 font-semibold text-gray-400">Recomendations</h3>
-              <p class="mt-2 text-lg font-medium tracking-tight text-white">Personalized wokrout recomendations</p>
-              <p class="mt-2 max-w-lg text-sm/6 text-gray-400">sers can receive personalized workout recommendations based on their fitness goals, preferences, and workout history.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="bg-gray-900 py-24 sm:py-32">
-    <div class="mx-auto max-w-7xl px-6 lg:px-8">
-      <div class="mx-auto max-w-4xl text-center">
-        <h2 class="text-base/7 font-semibold text-indigo-400">Pricing</h2>
-        <p class="mt-2 text-balance text-5xl font-semibold tracking-tight text-white sm:text-6xl">Best pricing for you</p>
-      </div>
-      <p class="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg font-medium text-gray-400 sm:text-xl/8">The app offers a flexible pricing model with a free basic plan and premium subscriptions for advanced features like detailed analytics and personalized workout recommendations.</p>
-      <div class="mt-16 flex justify-center">
-        <fieldset aria-label="Payment frequency">
-          <div class="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs/5 font-semibold text-white">
-            <!-- Checked: "bg-indigo-500" -->
-            <label class="cursor-pointer rounded-full px-2.5 py-1">
-              <input type="radio" name="frequency" value="monthly" class="sr-only">
-              <span>Monthly</span>
-            </label>
-            <!-- Checked: "bg-indigo-500" -->
-            <label class="cursor-pointer rounded-full px-2.5 py-1">
-              <input type="radio" name="frequency" value="annually" class="sr-only">
-              <span>Annually</span>
-            </label>
-          </div>
-        </fieldset>
-      </div>
-      <div class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-        <div class="rounded-3xl p-8 ring-1 ring-white/10 xl:p-10">
-          <div class="flex items-center justify-between gap-x-4">
-            <h3 id="tier-freelancer" class="text-lg/8 font-semibold text-white">Free</h3>
-          </div>
-          <p class="mt-4 text-sm/6 text-gray-300">Basic workout tracing best to start with.</p>
-          <p class="mt-6 flex items-baseline gap-x-1">
-            <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-semibold tracking-tight text-white">$0</span>
-            <!-- Payment frequency, update based on frequency toggle state -->
-            <span class="text-sm/6 font-semibold text-gray-300">/month</span>
-          </p>
-          <a href="#" aria-describedby="tier-freelancer" class="mt-6 block rounded-md bg-white/10 px-3 py-2 text-center text-sm/6 font-semibold text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Buy plan</a>
-          <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-300 xl:mt-10">
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              50 workout history
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Custom workout creating
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Custom Exercise creating
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Tracking sets
-            </li>
-          </ul>
-        </div>
-        <div class="rounded-3xl bg-white/5 p-8 ring-2 ring-indigo-500 xl:p-10">
-          <div class="flex items-center justify-between gap-x-4">
-            <h3 id="tier-startup" class="text-lg/8 font-semibold text-white">Pro</h3>
-            <p class="rounded-full bg-indigo-500 px-2.5 py-1 text-xs/5 font-semibold text-white">Most popular</p>
-          </div>
-          <p class="mt-4 text-sm/6 text-gray-300">The best for beginner to intermediate lifters</p>
-          <p class="mt-6 flex items-baseline gap-x-1">
-            <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-semibold tracking-tight text-white">$5</span>
-            <!-- Payment frequency, update based on frequency toggle state -->
-            <span class="text-sm/6 font-semibold text-gray-300">/month</span>
-          </p>
-          <a href="#" aria-describedby="tier-startup" class="mt-6 block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Buy plan</a>
-          <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-300 xl:mt-10">
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Unlimited workout history
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Personalized wokrout recomendations
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Using workouts as templates
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Advanced workout analytics
-            </li>
-          </ul>
-        </div>
-        <div class="rounded-3xl p-8 ring-1 ring-white/10 xl:p-10">
-          <div class="flex items-center justify-between gap-x-4">
-            <h3 id="tier-enterprise" class="text-lg/8 font-semibold text-white">Premium</h3>
-          </div>
-          <p class="mt-4 text-sm/6 text-gray-300">Best for advanced lifters</p>
-          <p class="mt-6 flex items-baseline gap-x-1">
-            <!-- Price, update based on frequency toggle state -->
-            <span class="text-4xl font-semibold tracking-tight text-white">$15</span>
-            <!-- Payment frequency, update based on frequency toggle state -->
-            <span class="text-sm/6 font-semibold text-gray-300">/month</span>
-          </p>
-          <a href="#" aria-describedby="tier-enterprise" class="mt-6 block rounded-md bg-white/10 px-3 py-2 text-center text-sm/6 font-semibold text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Buy plan</a>
-          <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-300 xl:mt-10">
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              AI generated workout recomendations
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Massive library with workouts
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Advanced AI workout analytics
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Automatic workout tracking
-            </li>
-            <li class="flex gap-x-3">
-              <svg class="h-6 w-5 flex-none text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
-              </svg>
-              Smart watch integration
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  
-  
+<div class="bg-gray-900 py-24 sm:py-32">
+	<div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+		<h2 class="text-base/7 font-semibold text-indigo-400">
+			Workout more effectively
+		</h2>
+		<p
+			class="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-white sm:text-5xl"
+		>
+			Everything you need to track your workouts
+		</p>
+		<div
+			class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2"
+		>
+			<div class="flex p-px lg:col-span-4">
+				<div
+					class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"
+				>
+					<img
+						class="h-80 object-cover object-left"
+						src="https://tailwindui.com/plus/img/component-images/bento-02-releases.png"
+						alt=""
+					/>
+					<div class="p-10">
+						<h3 class="text-sm/4 font-semibold text-gray-400">
+							Workouts
+						</h3>
+						<p
+							class="mt-2 text-lg font-medium tracking-tight text-white"
+						>
+							Create your own custom workouts
+						</p>
+						<p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+							You can design personalized workouts by naming them
+							and adding a structured list of exercises.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="flex p-px lg:col-span-2">
+				<div
+					class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-tr-[2rem]"
+				>
+					<img
+						class="h-80 object-cover"
+						src="https://tailwindui.com/plus/img/component-images/bento-02-integrations.png"
+						alt=""
+					/>
+					<div class="p-10">
+						<h3 class="text-sm/4 font-semibold text-gray-400">
+							Exercises
+						</h3>
+						<p
+							class="mt-2 text-lg font-medium tracking-tight text-white"
+						>
+							Create your own custom exercises
+						</p>
+						<p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+							You can build exercises from scratch or use
+							templates, including details like muscle groups,
+							descriptions, and default parameters.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="flex p-px lg:col-span-2">
+				<div
+					class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 lg:rounded-bl-[2rem]"
+				>
+					<img
+						class="h-80 object-cover"
+						src="https://tailwindui.com/plus/img/component-images/bento-02-security.png"
+						alt=""
+					/>
+					<div class="p-10">
+						<h3 class="text-sm/4 font-semibold text-gray-400">
+							Sets
+						</h3>
+						<p
+							class="mt-2 text-lg font-medium tracking-tight text-white"
+						>
+							Track your sets
+						</p>
+						<p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+							You can log sets for each exercise, specifying
+							repetitions, weights, and other metrics to track
+							performance accurately.
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="flex p-px lg:col-span-4">
+				<div
+					class="overflow-hidden rounded-lg bg-gray-800 ring-1 ring-white/15 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"
+				>
+					<img
+						class="h-80 object-cover object-left"
+						src="https://tailwindui.com/plus/img/component-images/bento-02-performance.png"
+						alt=""
+					/>
+					<div class="p-10">
+						<h3 class="text-sm/4 font-semibold text-gray-400">
+							Recomendations
+						</h3>
+						<p
+							class="mt-2 text-lg font-medium tracking-tight text-white"
+						>
+							Personalized wokrout recomendations
+						</p>
+						<p class="mt-2 max-w-lg text-sm/6 text-gray-400">
+							sers can receive personalized workout
+							recommendations based on their fitness goals,
+							preferences, and workout history.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="bg-gray-900 py-24 sm:py-32">
+	<div class="mx-auto max-w-7xl px-6 lg:px-8">
+		<div class="mx-auto max-w-4xl text-center">
+			<h2 class="text-base/7 font-semibold text-indigo-400">Pricing</h2>
+			<p
+				class="mt-2 text-balance text-5xl font-semibold tracking-tight text-white sm:text-6xl"
+			>
+				Best pricing for you
+			</p>
+		</div>
+		<p
+			class="mx-auto mt-6 max-w-2xl text-pretty text-center text-lg font-medium text-gray-400 sm:text-xl/8"
+		>
+			The app offers a flexible pricing model with a free basic plan and
+			premium subscriptions for advanced features like detailed analytics
+			and personalized workout recommendations.
+		</p>
+		<div class="mt-16 flex justify-center">
+			<fieldset aria-label="Payment frequency">
+				<div
+					class="grid grid-cols-2 gap-x-1 rounded-full bg-white/5 p-1 text-center text-xs/5 font-semibold text-white"
+				>
+					<!-- Checked: "bg-indigo-500" -->
+					<label class="cursor-pointer rounded-full px-2.5 py-1">
+						<input
+							type="radio"
+							name="frequency"
+							value="monthly"
+							class="sr-only"
+						/>
+						<span>Monthly</span>
+					</label>
+					<!-- Checked: "bg-indigo-500" -->
+					<label class="cursor-pointer rounded-full px-2.5 py-1">
+						<input
+							type="radio"
+							name="frequency"
+							value="annually"
+							class="sr-only"
+						/>
+						<span>Annually</span>
+					</label>
+				</div>
+			</fieldset>
+		</div>
+		<div
+			class="isolate mx-auto mt-10 grid max-w-md grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+		>
+			<div class="rounded-3xl p-8 ring-1 ring-white/10 xl:p-10">
+				<div class="flex items-center justify-between gap-x-4">
+					<h3
+						id="tier-freelancer"
+						class="text-lg/8 font-semibold text-white"
+					>
+						Free
+					</h3>
+				</div>
+				<p class="mt-4 text-sm/6 text-gray-300">
+					Basic workout tracing best to start with.
+				</p>
+				<p class="mt-6 flex items-baseline gap-x-1">
+					<!-- Price, update based on frequency toggle state -->
+					<span
+						class="text-4xl font-semibold tracking-tight text-white"
+						>$0</span
+					>
+					<!-- Payment frequency, update based on frequency toggle state -->
+					<span class="text-sm/6 font-semibold text-gray-300"
+						>/month</span
+					>
+				</p>
+				<a
+					href="#"
+					aria-describedby="tier-freelancer"
+					class="mt-6 block rounded-md bg-white/10 px-3 py-2 text-center text-sm/6 font-semibold text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+					>Buy plan</a
+				>
+				<ul
+					role="list"
+					class="mt-8 space-y-3 text-sm/6 text-gray-300 xl:mt-10"
+				>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						50 workout history
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Custom workout creating
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Custom Exercise creating
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Tracking sets
+					</li>
+				</ul>
+			</div>
+			<div
+				class="rounded-3xl bg-white/5 p-8 ring-2 ring-indigo-500 xl:p-10"
+			>
+				<div class="flex items-center justify-between gap-x-4">
+					<h3
+						id="tier-startup"
+						class="text-lg/8 font-semibold text-white"
+					>
+						Pro
+					</h3>
+					<p
+						class="rounded-full bg-indigo-500 px-2.5 py-1 text-xs/5 font-semibold text-white"
+					>
+						Most popular
+					</p>
+				</div>
+				<p class="mt-4 text-sm/6 text-gray-300">
+					The best for beginner to intermediate lifters
+				</p>
+				<p class="mt-6 flex items-baseline gap-x-1">
+					<!-- Price, update based on frequency toggle state -->
+					<span
+						class="text-4xl font-semibold tracking-tight text-white"
+						>$5</span
+					>
+					<!-- Payment frequency, update based on frequency toggle state -->
+					<span class="text-sm/6 font-semibold text-gray-300"
+						>/month</span
+					>
+				</p>
+				<a
+					href="#"
+					aria-describedby="tier-startup"
+					class="mt-6 block rounded-md bg-indigo-500 px-3 py-2 text-center text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+					>Buy plan</a
+				>
+				<ul
+					role="list"
+					class="mt-8 space-y-3 text-sm/6 text-gray-300 xl:mt-10"
+				>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Unlimited workout history
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Personalized wokrout recomendations
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Using workouts as templates
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Advanced workout analytics
+					</li>
+				</ul>
+			</div>
+			<div class="rounded-3xl p-8 ring-1 ring-white/10 xl:p-10">
+				<div class="flex items-center justify-between gap-x-4">
+					<h3
+						id="tier-enterprise"
+						class="text-lg/8 font-semibold text-white"
+					>
+						Premium
+					</h3>
+				</div>
+				<p class="mt-4 text-sm/6 text-gray-300">
+					Best for advanced lifters
+				</p>
+				<p class="mt-6 flex items-baseline gap-x-1">
+					<!-- Price, update based on frequency toggle state -->
+					<span
+						class="text-4xl font-semibold tracking-tight text-white"
+						>$15</span
+					>
+					<!-- Payment frequency, update based on frequency toggle state -->
+					<span class="text-sm/6 font-semibold text-gray-300"
+						>/month</span
+					>
+				</p>
+				<a
+					href="#"
+					aria-describedby="tier-enterprise"
+					class="mt-6 block rounded-md bg-white/10 px-3 py-2 text-center text-sm/6 font-semibold text-white hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+					>Buy plan</a
+				>
+				<ul
+					role="list"
+					class="mt-8 space-y-3 text-sm/6 text-gray-300 xl:mt-10"
+				>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						AI generated workout recomendations
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Massive library with workouts
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Advanced AI workout analytics
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Automatic workout tracking
+					</li>
+					<li class="flex gap-x-3">
+						<svg
+							class="h-6 w-5 flex-none text-white"
+							viewBox="0 0 20 20"
+							fill="currentColor"
+							aria-hidden="true"
+							data-slot="icon"
+						>
+							<path
+								fill-rule="evenodd"
+								d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z"
+								clip-rule="evenodd"
+							/>
+						</svg>
+						Smart watch integration
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

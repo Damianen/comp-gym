@@ -1,64 +1,84 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, delay, map } from 'rxjs';
-import {
-  ApiResponse,
-  IUpdateWorkout,
-  IWorkout,
-  WorkoutType,
-} from '@comp-gym/shared/api';
-import {
-  IUpdateSet,
-  ISet,
-  SetType,
-} from '@comp-gym/shared/api';
+import { Observable, of, delay, map, Subscription } from 'rxjs';
+import { ApiResponse, IUpdateWorkout, IUserIdentity, IWorkout, WorkoutType } from '@comp-gym/shared/api';
+import { IUpdateSet, ISet, SetType } from '@comp-gym/shared/api';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@comp-gym/shared/util-env';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({
-  providedIn: 'root',
+	providedIn: 'root',
 })
 export class WorkoutService {
-  constructor(private http: HttpClient) {}
+	subscription?: Subscription;
+	user?: IUserIdentity;
 
-  getWorkoutsAsync(): Observable<IWorkout[]> {
-    return this.http
-      .get<ApiResponse<any>>(environment.API_URL + 'workout')
-      .pipe(map((response) => response.results));
-  }
+	constructor(
+		private http: HttpClient,
+		private authService: AuthService
+	) {
+		this.subscription = this.authService.currentUser$.subscribe((currentUser?: IUserIdentity) => {
+			if (currentUser) {
+				this.user = currentUser;
+			}
+		});
+	}
 
-  getWorkoutById(_id: string): Observable<IWorkout> {
-    return this.http
-      .get<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
-      .pipe(map((response) =>  response.results));
-  }
+	ngOnDestroy(): void {
+		if (this.subscription) {
+			this.subscription.unsubscribe();
+		}
+	}
 
-  createWorkout(workout: IWorkout): Observable<IWorkout> {
-    return this.http.post<ApiResponse<any>>(environment.API_URL + 'workout', workout)
-      .pipe(map((response) => response.results));
-  }
+	getWorkoutsAsync(): Observable<IWorkout[]> {
+		return this.http
+			.get<ApiResponse<any>>(environment.API_URL + 'workout', {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
+			.pipe(map((response) => response.results));
+	}
 
-  deleteWorkout(_id: string): Observable<IWorkout> {
-    return this.http.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
-      .pipe(map((response) => response.results));
-  }
+	getWorkoutById(_id: string): Observable<IWorkout> {
+		return this.http
+			.get<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
+			.pipe(map((response) => response.results));
+	}
 
-  updateWorkout(_id: string, workout: IUpdateWorkout): Observable<IWorkout> {
-    return this.http.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, workout)
-      .pipe(map((response) => response.results));
-  }
+	createWorkout(workout: IWorkout): Observable<IWorkout> {
+		return this.http
+			.post<ApiResponse<any>>(environment.API_URL + 'workout', workout)
+			.pipe(map((response) => response.results));
+	}
 
-  deleteExerciseFromWorkout(_id: string, exerciseIndex: number): Observable<IWorkout> {
-    return this.http.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/exercise/' + exerciseIndex)
-      .pipe(map((response) => response.results));
-  }
+	deleteWorkout(_id: string): Observable<IWorkout> {
+		return this.http
+			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
+			.pipe(map((response) => response.results));
+	}
 
-  addSetToWorkout(_id: string, set: ISet, exerciseIndex: number): Observable<IWorkout> {
-    return this.http.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex, set)
-      .pipe(map((response) => response.results));
-  }
+	updateWorkout(_id: string, workout: IUpdateWorkout): Observable<IWorkout> {
+		return this.http
+			.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, workout)
+			.pipe(map((response) => response.results));
+	}
 
-  deleteSetFromWorkout(_id: string, exerciseIndex: number, setIndex: number): Observable<IWorkout> {
-    return this.http.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex + '/' + setIndex)
-      .pipe(map((response) => response.results));
-  }
+	deleteExerciseFromWorkout(_id: string, exerciseIndex: number): Observable<IWorkout> {
+		return this.http
+			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/exercise/' + exerciseIndex)
+			.pipe(map((response) => response.results));
+	}
+
+	addSetToWorkout(_id: string, set: ISet, exerciseIndex: number): Observable<IWorkout> {
+		return this.http
+			.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex, set)
+			.pipe(map((response) => response.results));
+	}
+
+	deleteSetFromWorkout(_id: string, exerciseIndex: number, setIndex: number): Observable<IWorkout> {
+		return this.http
+			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex + '/' + setIndex)
+			.pipe(map((response) => response.results));
+	}
 }

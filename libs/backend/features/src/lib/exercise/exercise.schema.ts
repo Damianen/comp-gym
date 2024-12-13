@@ -7,21 +7,20 @@ export type ExerciseDocument = Exercise & Document;
 
 @Schema()
 export class Exercise implements IExercise {
+	@IsMongoId()
+	_id!: string;
 
-    @IsMongoId()
-    _id!: string;
+	@Prop({ required: true, type: Number })
+	number!: number;
 
-    @Prop({ required: true, type: Number})
-    number!: number;
+	@Prop({ required: true, type: String })
+	name!: string;
 
-    @Prop({ required: true, type: String})
-    name!: string;
+	@Prop({ required: true, type: String })
+	description!: string;
 
-    @Prop({ required: true, type: String})
-    description!: string;
-
-    @Prop({ required: true, type: String, default: ExerciseType.Other})
-    exerciseType!: ExerciseType;
+	@Prop({ required: true, type: String, default: ExerciseType.Other })
+	exerciseType!: ExerciseType;
 }
 
 export const ExerciseSchema = SchemaFactory.createForClass(Exercise);

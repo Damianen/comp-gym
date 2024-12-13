@@ -10,15 +10,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { FeaturesModule } from '@comp-gym/frontend/features';
 
 @NgModule({
-    declarations: [AppComponent, HomeComponent, AboutComponent, FooterComponent, HeaderComponent],
-    imports: [
-        BrowserModule,
-        RouterModule.forRoot(appRoutes, {
-            initialNavigation: 'enabledBlocking'
-        }),
-        FeaturesModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]   
+	declarations: [AppComponent, HomeComponent, AboutComponent, FooterComponent, HeaderComponent],
+	imports: [
+		BrowserModule,
+		RouterModule.forRoot(appRoutes, {
+			initialNavigation: 'enabledBlocking',
+		}),
+		FeaturesModule,
+	],
+	providers: [],
+	bootstrap: [AppComponent],
 })
 export class AppModule {}

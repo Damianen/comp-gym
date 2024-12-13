@@ -1,0 +1,112 @@
+<main class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+	<form #userEditForm="ngForm" (ngSubmit)="userEditForm.form.valid && onSubmit(user)" novalidate>
+		<div class="border-b border-white/10 pb-12">
+			<div>
+				<h2 class="text-base/7 font-semibold text-white">Account Creation</h2>
+				<p class="mt-1 text-sm/6 text-gray-400">Fill in your details here.</p>
+
+				<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+					<div class="sm:col-span-3">
+						<label for="first-name" class="block text-sm/6 font-medium text-white">First name</label>
+						<div class="mt-2">
+							<input
+								type="text"
+								id="firstName"
+								name="firstName"
+								#userTitle="ngModel"
+								required
+								[(ngModel)]="user.firstName"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+					</div>
+
+					<div class="sm:col-span-3">
+						<label for="last-name" class="block text-sm/6 font-medium text-white">Last name</label>
+						<div class="mt-2">
+							<input
+								type="text"
+								id="lastName"
+								name="lastName"
+								#userTitle="ngModel"
+								required
+								[(ngModel)]="user.lastName"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+					</div>
+
+					<div class="sm:col-span-4">
+						<label for="email" class="block text-sm/6 font-medium text-white">Email address</label>
+						<div class="mt-2">
+							<input
+								type="email"
+								id="email"
+								name="email"
+								#userTitle="ngModel"
+								required
+								[(ngModel)]="user.email"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+					</div>
+
+					<div class="sm:col-span-2 sm:col-start-1">
+						<label for="Birthdate" class="block text-sm/6 font-medium text-white">Birthdate</label>
+						<div class="mt-2">
+							<input
+								type="date"
+								id="birthdate"
+								name="birthdate"
+								#userTitle="ngModel"
+								required
+								[(ngModel)]="user.birthdate"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+					</div>
+
+					<div class="sm:col-span-2">
+						<label for="height" class="block text-sm/6 font-medium text-white">Height (cm)</label>
+						<div class="mt-2">
+							<input
+								type="number"
+								id="height"
+								name="height"
+								#userTitle="ngModel"
+								required
+								[(ngModel)]="user.height"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+					</div>
+
+					<div class="sm:col-span-2">
+						<label for="weight" class="block text-sm/6 font-medium text-white">Weight (kg)</label>
+						<div class="mt-2">
+							<input
+								type="number"
+								id="weight"
+								name="weight"
+								#userTitle="ngModel"
+								required
+								[(ngModel)]="user.weight"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-6 flex items-center justify-end gap-x-6">
+			<button routerLink="../" type="button" class="text-sm/6 font-semibold text-white">Cancel</button>
+			<button
+				id="submitbutton"
+				type="submit"
+				class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+			>
+				Save
+			</button>
+		</div>
+	</form>
+</main>

@@ -1,20 +1,20 @@
-import { IsNotEmpty, IsString, IsNumber } from "class-validator"; 
-import { ISet, SetType } from "@comp-gym/shared/api";
+import { IsNotEmpty, IsString, IsNumber } from 'class-validator';
+import { ISet, SetType } from '@comp-gym/shared/api';
 
 export class SetDto implements ISet {
-    @IsNumber()
-    @IsNotEmpty()
-    reps!: number;
+	@IsNumber()
+	@IsNotEmpty()
+	reps!: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    duration!: number;
+	@IsNumber()
+	@IsNotEmpty()
+	duration!: number;
 
-    @IsNumber()
-    @IsNotEmpty()
-    weight!: number;
+	@IsNumber()
+	@IsNotEmpty()
+	weight!: number;
 
-    @IsString()
-    @IsNotEmpty()
-    type!: SetType;
+	@IsString()
+	@IsNotEmpty()
+	type!: SetType;
 }

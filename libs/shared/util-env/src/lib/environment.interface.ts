@@ -1,8 +1,8 @@
 export interface IEnvironment {
-  production: boolean;
+	production: boolean;
 
-  ROOT_DOMAIN_URL: string;
-  API_URL: string;
+	ROOT_DOMAIN_URL: string;
+	API_URL: string;
 
-  MONGO_DB_CONNECTION_STRING: string;
+	MONGO_DB_CONNECTION_STRING: string;
 }

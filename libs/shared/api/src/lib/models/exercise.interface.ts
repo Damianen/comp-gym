@@ -1,21 +1,21 @@
-import { IEntity } from "./Entity.interface";
-import { ISet } from "./set.interface";
+import { IEntity } from './entity.interface';
+import { ISet } from './set.interface';
 
 export enum ExerciseType {
-    BodyWheight = 'BodyWheigt',
-    Cardio = 'Cardio',
-    Machine = 'Machine',
-    FreeWheight = 'FreeWeight',
-    Cable = 'Cable',
-    Stretch = 'Stretch',
-    Other = 'Other'
+	BodyWheight = 'BodyWheigt',
+	Cardio = 'Cardio',
+	Machine = 'Machine',
+	FreeWheight = 'FreeWeight',
+	Cable = 'Cable',
+	Stretch = 'Stretch',
+	Other = 'Other',
 }
 
 export interface IExercise extends IEntity {
-    number: number;
-    name: string;
-    description: string;
-    exerciseType: ExerciseType;
+	number: number;
+	name: string;
+	description: string;
+	exerciseType: ExerciseType;
 }
 
 export type ICreateExercise = Pick<IExercise, 'name' | 'description' | 'exerciseType'>;

@@ -1,29 +1,31 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@comp-gym/backend/dto": ["libs/backend/dto/src/index.ts"],
-      "@comp-gym/backend/features": ["libs/backend/features/src/index.ts"],
-      "@comp-gym/backend/user": ["libs/backend/user/src/index.ts"],
-      "@comp-gym/frontend/common": ["libs/frontend/common/src/index.ts"],
-      "@comp-gym/frontend/features": ["libs/frontend/features/src/index.ts"],
-      "@comp-gym/frontend/ui": ["libs/frontend/ui/src/index.ts"],
-      "@comp-gym/shared/api": ["libs/shared/api/src/index.ts"],
-      "@comp-gym/shared/util-env": ["libs/shared/util-env/src/index.ts"]
-    }
-  },
-  "exclude": ["node_modules", "tmp"]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"lib": ["es2020", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@comp-gym/auth": ["libs/backend/auth/src/index.ts"],
+			"@comp-gym/backend/dto": ["libs/backend/dto/src/index.ts"],
+			"@comp-gym/backend/features": ["libs/backend/features/src/index.ts"],
+			"@comp-gym/backend/user": ["libs/backend/user/src/index.ts"],
+			"@comp-gym/frontend/common": ["libs/frontend/common/src/index.ts"],
+			"@comp-gym/frontend/features": ["libs/frontend/features/src/index.ts"],
+			"@comp-gym/frontend/ui": ["libs/frontend/ui/src/index.ts"],
+			"@comp-gym/shared/api": ["libs/shared/api/src/index.ts"],
+			"@comp-gym/shared/util-env": ["libs/shared/util-env/src/index.ts"],
+			"@comp-gym/user": ["libs/backend/user/src/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tmp"]
 }

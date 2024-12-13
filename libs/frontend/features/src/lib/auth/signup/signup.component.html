@@ -1,0 +1,311 @@
+<main class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+	<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+		<div class="border-b border-white/10 pb-12">
+			<div>
+				<h2 class="text-base/7 font-semibold text-white">Account Creation</h2>
+				<p class="mt-1 text-sm/6 text-gray-400">Fill in your details here.</p>
+
+				<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+					<div class="sm:col-span-3">
+						<label for="first-name" class="block text-sm/6 font-medium text-white">First name</label>
+						<div class="mt-2">
+							<input
+								type="text"
+								formControlName="firstName"
+								id="inputFirstName"
+								[ngClass]="{
+									'is-invalid':
+										signupForm.get('firstName')!.invalid && signupForm.get('firstName')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('firstName')!.valid && signupForm.get('firstName')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid first name</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="sm:col-span-3">
+						<label for="last-name" class="block text-sm/6 font-medium text-white">Last name</label>
+						<div class="mt-2">
+							<input
+								type="text"
+								formControlName="lastName"
+								id="inputLastName"
+								[ngClass]="{
+									'is-invalid':
+										signupForm.get('lastName')!.invalid && signupForm.get('lastName')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('lastName')!.valid && signupForm.get('lastName')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid last name</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="sm:col-span-4">
+						<label for="email" class="block text-sm/6 font-medium text-white">Email address</label>
+						<div class="mt-2">
+							<input
+								type="email"
+								formControlName="email"
+								id="inputEmail"
+								aria-describedby="emailHelp"
+								[ngClass]="{
+									'is-invalid': signupForm.get('email')!.invalid && signupForm.get('email')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('email')!.valid && signupForm.get('email')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid email</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="sm:col-span-4">
+						<label for="email" class="block text-sm/6 font-medium text-white">Password</label>
+						<div class="mt-2">
+							<input
+								type="password"
+								class="form-control"
+								formControlName="password"
+								id="inputPassword"
+								[ngClass]="{
+									'is-invalid':
+										signupForm.get('password')!.invalid && signupForm.get('password')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('password')!.valid && signupForm.get('password')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid password</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="sm:col-span-2 sm:col-start-1">
+						<label for="Birthdate" class="block text-sm/6 font-medium text-white">Birthdate</label>
+						<div class="mt-2">
+							<input
+								type="date"
+								formControlName="birthdate"
+								id="inputBirthdate"
+								[ngClass]="{
+									'is-invalid':
+										signupForm.get('birthdate')!.invalid && signupForm.get('birthdate')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('birthdate')!.valid && signupForm.get('birthdate')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid birthdate</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="sm:col-span-2">
+						<label for="height" class="block text-sm/6 font-medium text-white">Height (cm)</label>
+						<div class="mt-2">
+							<input
+								type="number"
+								formControlName="height"
+								id="inputHeight"
+								[ngClass]="{
+									'is-invalid':
+										signupForm.get('height')!.invalid && signupForm.get('height')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('height')!.valid && signupForm.get('height')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid height</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="sm:col-span-2">
+						<label for="weight" class="block text-sm/6 font-medium text-white">Weight (kg)</label>
+						<div class="mt-2">
+							<input
+								type="number"
+								formControlName="weight"
+								id="inputWeight"
+								[ngClass]="{
+									'is-invalid':
+										signupForm.get('weight')!.invalid && signupForm.get('weight')!.touched,
+								}"
+								class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+							/>
+						</div>
+						<div
+							class="rounded-md pt-2"
+							*ngIf="!signupForm.get('weight')!.valid && signupForm.get('weight')!.touched"
+						>
+							<div class="flex">
+								<div class="shrink-0">
+									<svg
+										class="size-5 text-red-500"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+										aria-hidden="true"
+										data-slot="icon"
+									>
+										<path
+											fill-rule="evenodd"
+											d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM8.28 7.22a.75.75 0 0 0-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 1 0 1.06 1.06L10 11.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L11.06 10l1.72-1.72a.75.75 0 0 0-1.06-1.06L10 8.94 8.28 7.22Z"
+											clip-rule="evenodd"
+										/>
+									</svg>
+								</div>
+								<div class="ml-3">
+									<h3 class="text-sm font-medium text-red-500">Enter a valid weight</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-6 flex items-center justify-end gap-x-6">
+			<button routerLink="../" type="button" class="text-sm/6 font-semibold text-white">Cancel</button>
+			<button
+				id="submitbutton"
+				type="submit"
+				[disabled]="!signupForm.valid"
+				class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+			>
+				Save
+			</button>
+		</div>
+	</form>
+</main>
