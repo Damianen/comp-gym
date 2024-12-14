@@ -31,7 +31,11 @@ export class UserService implements OnDestroy {
 
 	getUserByIdAsObservable(id: string): Observable<IUser> {
 		return this.http
-			.get<ApiResponse<any>>(environment.API_URL + 'user/' + id)
+			.get<ApiResponse<any>>(environment.API_URL + 'user/' + id, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
@@ -43,14 +47,21 @@ export class UserService implements OnDestroy {
 
 	deleteUser(id: string): Observable<IUser> {
 		return this.http
-			.delete<ApiResponse<any>>(environment.API_URL + 'user/' + id)
+			.delete<ApiResponse<any>>(environment.API_URL + 'user/' + id, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	updateUser(user: IUser): Observable<IUser> {
-		return this.http.put<ApiResponse<any>>(environment.API_URL + 'user/' + user._id, user).pipe(
-			tap(console.log),
-			map((response) => response.results)
-		);
+		return this.http
+			.put<ApiResponse<any>>(environment.API_URL + 'user/' + user._id, user, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
+			.pipe(map((response) => response.results));
 	}
 }

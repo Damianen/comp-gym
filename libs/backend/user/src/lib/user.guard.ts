@@ -1,12 +1,23 @@
 import { CanActivate, ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
-import { Request } from 'express';
-import { Workout } from './workout/workout.schema';
 import { Model } from 'mongoose';
+import { User } from './user.schema';
+import { Observable } from 'rxjs';
+import { Request } from 'express';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class UserExistGuard implements CanActivate {
+	constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+
+	canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+		const user = context.switchToHttp().getRequest().body;
+		return !!this.userModel.findOne({ email: user.email });
+	}
+}
+
+@Injectable()
+export class IsTokenCorrectWithParam implements CanActivate {
 	constructor(private jwtService: JwtService) {}
 
 	async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -20,32 +31,8 @@ export class AuthGuard implements CanActivate {
 				secret: process.env['JWT_SECRET'] || 'secretstring',
 			});
 			request['user'] = payload;
-		} catch {
-			throw new UnauthorizedException();
-		}
-		return true;
-	}
 
-	private extractTokenFromHeader(request: Request): string | undefined {
-		const [type, token] = request.headers.authorization?.split(' ') ?? [];
-		return type === 'Bearer' ? token : undefined;
-	}
-}
-
-@Injectable()
-export class IsWorkoutFromUserGuard implements CanActivate {
-	constructor(
-		private jwtService: JwtService,
-		@InjectModel('Workout') private readonly workoutModel: Model<Workout>
-	) {}
-
-	async canActivate(context: ExecutionContext): Promise<boolean> {
-		const request = context.switchToHttp().getRequest();
-
-		try {
-			const workout = await this.workoutModel.findById(request.params.id).populate('user').exec();
-
-			if (workout?.user._id != request['user']['user_id']) {
+			if (request.params.id != request['user']['user_id']) {
 				throw new UnauthorizedException();
 			}
 		} catch {

@@ -4,12 +4,14 @@ import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 import { IUserIdentity } from '@comp-gym/shared/api';
+import { NotificationService } from '../feedback/notifications/notification.service';
 
 @Injectable()
 export class LoggedInAuthGuard implements CanActivate, CanActivateChild {
 	constructor(
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private notificationService: NotificationService
 	) {}
 
 	canActivate(): Observable<boolean> {
@@ -19,6 +21,7 @@ export class LoggedInAuthGuard implements CanActivate, CanActivateChild {
 					return true;
 				} else {
 					this.router.navigate(['/login']);
+					this.notificationService.error('Login first!', 4000);
 					return false;
 				}
 			})
@@ -30,34 +33,5 @@ export class LoggedInAuthGuard implements CanActivate, CanActivateChild {
 		state: RouterStateSnapshot
 	): Observable<boolean> | Promise<boolean> | boolean {
 		return this.canActivate();
-	}
-}
-
-@Injectable()
-export class UserEditOwnDataAuthGuard implements CanActivate, OnDestroy {
-	constructor(
-		private authService: AuthService,
-		private router: Router
-	) {}
-
-	subs!: Subscription;
-	userId?: string;
-
-	canActivate(route: ActivatedRouteSnapshot): Observable<boolean> {
-		const userId = route.paramMap.get('id');
-		return this.authService.currentUser$.pipe(
-			map((user: IUserIdentity | undefined) => {
-				if (user && userId != null && userId == user._id) {
-					return true;
-				} else {
-					this.router.navigate(['/']);
-					return false;
-				}
-			})
-		);
-	}
-
-	ngOnDestroy(): void {
-		this.subs.unsubscribe();
 	}
 }

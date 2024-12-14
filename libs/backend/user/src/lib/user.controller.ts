@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Put, Delete, UseGuards } from '@nes
 import { UserService } from './user.service';
 import { IUser } from '@comp-gym/shared/api';
 import { UserDto } from '@comp-gym/backend/dto';
-import { UserExistGuard } from './user-exists.guard';
+import { UserExistGuard } from './user.guard';
 
 @Controller('user')
 export class UserController {

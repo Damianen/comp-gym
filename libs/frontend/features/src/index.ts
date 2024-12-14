@@ -7,6 +7,8 @@ export * from './lib/auth/login/login.component';
 export * from './lib/auth/signup/signup.component';
 export * from './lib/user/user-edit/user-edit.component';
 export * from './lib/user/user-details/user-detail.component';
+export * from './lib/feedback/notifications/component/notification.component';
+export * from './lib/auth/auth.guard';
 export * from './lib/auth/auth.service';
 export * from './lib/auth/auth.service';
 export * from './lib/workout/workout.service';

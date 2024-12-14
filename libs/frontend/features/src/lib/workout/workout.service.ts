@@ -31,6 +31,7 @@ export class WorkoutService {
 	}
 
 	getWorkoutsAsync(): Observable<IWorkout[]> {
+		console.log('test');
 		return this.http
 			.get<ApiResponse<any>>(environment.API_URL + 'workout', {
 				headers: {
@@ -42,43 +43,74 @@ export class WorkoutService {
 
 	getWorkoutById(_id: string): Observable<IWorkout> {
 		return this.http
-			.get<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
+			.get<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	createWorkout(workout: IWorkout): Observable<IWorkout> {
 		return this.http
-			.post<ApiResponse<any>>(environment.API_URL + 'workout', workout)
+			.post<ApiResponse<any>>(environment.API_URL + 'workout', workout, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	deleteWorkout(_id: string): Observable<IWorkout> {
 		return this.http
-			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id)
+			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	updateWorkout(_id: string, workout: IUpdateWorkout): Observable<IWorkout> {
 		return this.http
-			.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, workout)
+			.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id, workout, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	deleteExerciseFromWorkout(_id: string, exerciseIndex: number): Observable<IWorkout> {
 		return this.http
-			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/exercise/' + exerciseIndex)
+			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/exercise/' + exerciseIndex, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	addSetToWorkout(_id: string, set: ISet, exerciseIndex: number): Observable<IWorkout> {
 		return this.http
-			.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex, set)
+			.put<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex, set, {
+				headers: {
+					authorization: `Bearer ${this.user?.token as string}`,
+				},
+			})
 			.pipe(map((response) => response.results));
 	}
 
 	deleteSetFromWorkout(_id: string, exerciseIndex: number, setIndex: number): Observable<IWorkout> {
 		return this.http
-			.delete<ApiResponse<any>>(environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex + '/' + setIndex)
+			.delete<ApiResponse<any>>(
+				environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex + '/' + setIndex,
+				{
+					headers: {
+						authorization: `Bearer ${this.user?.token as string}`,
+					},
+				}
+			)
 			.pipe(map((response) => response.results));
 	}
 }

@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 import { IUserIdentity } from '@comp-gym/shared/api';
 import { UserService } from '../../user/user-service';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from '../../feedback/notifications/notification.service';
 
 @Component({
 	selector: 'lib-signup',
@@ -19,7 +20,8 @@ export class SignupComponent implements OnInit, OnDestroy {
 		private authService: AuthService,
 		private router: Router,
 		private route: ActivatedRoute,
-		private userService: UserService
+		private userService: UserService,
+		private notificationService: NotificationService
 	) {}
 
 	ngOnInit(): void {
@@ -51,10 +53,16 @@ export class SignupComponent implements OnInit, OnDestroy {
 				height: Number(this.signupForm.value.height),
 				weight: Number(this.signupForm.value.weight),
 			};
-			this.subscription = this.authService.register(userValues).subscribe(() => {
-				this.router.navigate(['../login'], {
-					relativeTo: this.route,
-				});
+			this.subscription = this.authService.register(userValues).subscribe({
+				next: () => {
+					this.router.navigate(['../login'], {
+						relativeTo: this.route,
+					});
+					this.notificationService.success('Your account was successfully created!', 3000);
+				},
+				error: (err: any) => {
+					this.notificationService.error(err.error.message, 6000);
+				},
 			});
 		}
 	}

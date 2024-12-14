@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthController } from './auth/auth.controller';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { User, UserSchema, UserModule } from '@comp-gym/backend/user';
 import { AuthService } from './auth/auth.service';
 

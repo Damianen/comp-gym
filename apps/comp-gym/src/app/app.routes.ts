@@ -11,24 +11,28 @@ import {
 	SignupComponent,
 	UserEditComponent,
 	UserDetailComponent,
+	LoggedInAuthGuard,
 } from '@comp-gym/frontend/features';
 
 export const appRoutes: Route[] = [
 	{ path: '', component: HomeComponent },
 	{ path: 'about', component: AboutComponent },
+
 	{ path: 'login', component: LoginComponent },
 	{ path: 'signup', component: SignupComponent },
-	{ path: 'account', component: UserDetailComponent },
-	{ path: 'account/edit', component: UserEditComponent },
-	{ path: 'workouts', component: WorkoutListComponent },
-	{ path: 'workout/new', component: WorkoutEditComponent },
-	{ path: 'workout/edit/:id', component: WorkoutEditComponent },
-	{ path: 'workout/:id', component: WorkoutDetailComponent },
-	{ path: 'workout/:id/exercise/add', component: ExerciseListComponent },
-	{ path: 'workout/:id/exercise/new', component: ExerciseEditComponent },
+	{ path: 'account', component: UserDetailComponent, canActivate: [LoggedInAuthGuard] },
+	{ path: 'account/edit', component: UserEditComponent, canActivate: [LoggedInAuthGuard] },
+
+	{ path: 'workouts', component: WorkoutListComponent, canActivate: [LoggedInAuthGuard] },
+	{ path: 'workout/new', component: WorkoutEditComponent, canActivate: [LoggedInAuthGuard] },
+	{ path: 'workout/edit/:id', component: WorkoutEditComponent, canActivate: [LoggedInAuthGuard] },
+	{ path: 'workout/:id', component: WorkoutDetailComponent, canActivate: [LoggedInAuthGuard] },
+	{ path: 'workout/:id/exercise/add', component: ExerciseListComponent, canActivate: [LoggedInAuthGuard] },
+	{ path: 'workout/:id/exercise/new', component: ExerciseEditComponent, canActivate: [LoggedInAuthGuard] },
 	{
 		path: 'workout/:id/exercise/edit/:exerciseId',
 		component: ExerciseEditComponent,
+		canActivate: [LoggedInAuthGuard],
 	},
 
 	{ path: '**', redirectTo: '' },

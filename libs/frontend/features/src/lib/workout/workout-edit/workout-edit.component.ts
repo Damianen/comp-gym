@@ -3,6 +3,7 @@ import { IWorkoutInfo, WorkoutType } from '@comp-gym/shared/api';
 import { Subscription, switchMap, of } from 'rxjs';
 import { WorkoutService } from '../workout.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { NotificationService } from '../../feedback/notifications/notification.service';
 
 @Component({
 	selector: 'lib-workout-edit',
@@ -20,7 +21,8 @@ export class WorkoutEditComponent implements OnInit, OnDestroy {
 	constructor(
 		private workoutService: WorkoutService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private notificationService: NotificationService
 	) {}
 
 	ngOnInit(): void {
@@ -36,15 +38,18 @@ export class WorkoutEditComponent implements OnInit, OnDestroy {
 						});
 					} else {
 						this.workoutId = String(params.get('id'));
-						return this.workoutService.getWorkoutById(
-							String(params.get('id'))
-						);
+						return this.workoutService.getWorkoutById(String(params.get('id')));
 					}
 				})
 			)
-			.subscribe((workout) => {
-				this.workout = workout;
-			});
+			.subscribe(
+				(workout) => {
+					this.workout = workout;
+				},
+				(err: any) => {
+					this.notificationService.error(err.error.message, 6000);
+				}
+			);
 	}
 
 	ngOnDestroy(): void {
@@ -53,35 +58,47 @@ export class WorkoutEditComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	onSubmit(workoutInfo: IWorkoutInfo): void {
+	onSubmit(workoutInfo: IWorkoutInfo, valid: boolean): void {
+		if (!valid) {
+			this.notificationService.error('One of the fields is missing!', 6000);
+			return;
+		}
+
 		const workout = {
 			...workoutInfo,
 			number: Math.random() * 10000000,
 			date: new Date(),
 			favorite: false,
-			user: null,
 			exercises: [],
 		};
 
 		if (this.workoutId) {
 			this.sub?.add(
-				this.workoutService
-					.updateWorkout(this.workoutId, workout)
-					.subscribe(() => {
+				this.workoutService.updateWorkout(this.workoutId, workout).subscribe(
+					() => {
 						this.router.navigate(['../../' + this.workoutId], {
 							relativeTo: this.route,
 						});
-					})
+						this.notificationService.success('Workout successfully updated!', 3000);
+					},
+					(err: any) => {
+						this.notificationService.error(err.error.message, 6000);
+					}
+				)
 			);
 		} else {
 			this.sub?.add(
-				this.workoutService
-					.createWorkout({ ...workout, _id: null })
-					.subscribe(() => {
+				this.workoutService.createWorkout({ ...workout, user: null, _id: null }).subscribe(
+					() => {
 						this.router.navigate(['../../workouts'], {
 							relativeTo: this.route,
 						});
-					})
+						this.notificationService.success('Workout successfully created!', 3000);
+					},
+					(err: any) => {
+						this.notificationService.error(err.error.message, 6000);
+					}
+				)
 			);
 		}
 	}

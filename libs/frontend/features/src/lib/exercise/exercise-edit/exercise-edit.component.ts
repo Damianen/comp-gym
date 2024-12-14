@@ -3,6 +3,7 @@ import { IExercise, ExerciseType } from '@comp-gym/shared/api';
 import { Subscription, switchMap, of } from 'rxjs';
 import { ExerciseService } from '../exercise.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { NotificationService } from '../../feedback/notifications/notification.service';
 
 @Component({
 	selector: 'lib-exercise-edit',
@@ -20,7 +21,8 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 	constructor(
 		private exerciseService: ExerciseService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private notificationService: NotificationService
 	) {}
 
 	ngOnInit(): void {
@@ -37,14 +39,17 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 						});
 					} else {
 						this.exerciseId = String(params.get('exerciseId'));
-						return this.exerciseService.getExerciseById(
-							String(params.get('exerciseId'))
-						);
+						return this.exerciseService.getExerciseById(String(params.get('exerciseId')));
 					}
 				})
 			)
-			.subscribe((exercise) => {
-				this.exercise = exercise;
+			.subscribe({
+				next: (exercise) => {
+					this.exercise = exercise;
+				},
+				error: (err: any) => {
+					this.notificationService.error(err.error.message, 6000);
+				},
 			});
 	}
 
@@ -54,7 +59,12 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	onSubmit(ExerciseInfo: IExercise): void {
+	onSubmit(ExerciseInfo: IExercise, valid: boolean): void {
+		if (!valid) {
+			this.notificationService.error('One of the fields is missing!', 6000);
+			return;
+		}
+
 		const Exercise = {
 			...ExerciseInfo,
 			number: Math.random() * 10000000,
@@ -62,36 +72,48 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 
 		if (this.exerciseId) {
 			this.sub?.add(
-				this.exerciseService
-					.updateExercise(this.exerciseId, Exercise)
-					.subscribe(() => {
-						this.router.navigate(['../add' + this.exerciseId], {
+				this.exerciseService.updateExercise(this.exerciseId, Exercise).subscribe({
+					next: () => {
+						this.router.navigate(['../../add'], {
 							relativeTo: this.route,
 						});
-					})
+						this.notificationService.success('Exercise successfully updated!', 3000);
+					},
+					error: (err: any) => {
+						this.notificationService.error(err.error.message, 6000);
+					},
+				})
 			);
 		} else {
 			this.sub?.add(
-				this.exerciseService
-					.createExercise({ ...Exercise, _id: null })
-					.subscribe(() => {
+				this.exerciseService.createExercise({ ...Exercise, _id: null }).subscribe({
+					next: () => {
 						this.router.navigate(['../add'], {
 							relativeTo: this.route,
 						});
-					})
+						this.notificationService.success('Exercise successfully created!', 3000);
+					},
+					error: (err: any) => {
+						this.notificationService.error(err.error.message, 6000);
+					},
+				})
 			);
 		}
 	}
 
 	deleteExercise() {
 		this.sub?.add(
-			this.exerciseService
-				.deleteExercise(String(this.exerciseId))
-				.subscribe(() => {
+			this.exerciseService.deleteExercise(String(this.exerciseId)).subscribe({
+				next: () => {
 					this.router.navigate(['../add'], {
 						relativeTo: this.route,
 					});
-				})
+					this.notificationService.success('Exercise successfully deleted!', 3000);
+				},
+				error: (err: any) => {
+					this.notificationService.error(err.error.message, 6000);
+				},
+			})
 		);
 	}
 }

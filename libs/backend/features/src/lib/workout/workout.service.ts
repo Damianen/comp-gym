@@ -2,21 +2,24 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { Workout as WorkoutModel, WorkoutDocument } from './workout.schema';
-import { IWorkout, IExercise, ISet } from '@comp-gym/shared/api';
+import { IWorkout, IExercise, ISet, IUser } from '@comp-gym/shared/api';
 import { WorkoutDto } from '@comp-gym/backend/dto';
 import { ExerciseService } from '../exercise/exercise.service';
+import { User as UserModel, UserDocument } from '@comp-gym/backend/user';
 
 @Injectable()
 export class WorkoutService {
 	constructor(
 		@InjectModel(WorkoutModel.name)
 		private workoutModel: Model<WorkoutDocument>,
+		@InjectModel(UserModel.name)
+		private userModel: Model<UserDocument>,
 		private exerciseService: ExerciseService
 	) {}
 
-	async getAll(): Promise<IWorkout[]> {
+	async getAll(req: any): Promise<IWorkout[]> {
 		const items = await this.workoutModel.find().populate('exercises', 'user').exec();
-		return items;
+		return items.filter((item) => item.user?._id == req['user']['user_id']);
 	}
 
 	async getById(_id: string): Promise<IWorkout | null> {
@@ -24,7 +27,8 @@ export class WorkoutService {
 		return item;
 	}
 
-	async create(workout: WorkoutDto): Promise<IWorkout> {
+	async create(req: any, workout: WorkoutDto): Promise<IWorkout> {
+		workout.user = (await this.userModel.findById(req['user']['user_id'])) as IUser;
 		const createdItem = this.workoutModel.create(workout);
 		return createdItem;
 	}

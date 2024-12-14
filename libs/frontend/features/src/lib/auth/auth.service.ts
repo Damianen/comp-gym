@@ -6,6 +6,7 @@ import { environment } from '@comp-gym/shared/util-env';
 import { map, catchError, switchMap } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IUserRegistration } from '@comp-gym/shared/api';
+import { NotificationService } from '../feedback/notifications/notification.service';
 
 @Injectable({
 	providedIn: 'root',
@@ -19,7 +20,8 @@ export class AuthService {
 
 	constructor(
 		private http: HttpClient,
-		private router: Router
+		private router: Router,
+		private notificationService: NotificationService
 	) {
 		this.getUserFromLocalStorage()
 			.pipe(
@@ -102,6 +104,7 @@ export class AuthService {
 			.then(() => {
 				localStorage.removeItem(this.CURRENT_USER);
 				this.currentUser$.next(undefined);
+				this.notificationService.success('Successfully logged out!', 3000);
 			})
 			.catch((error) => {
 				throw error;

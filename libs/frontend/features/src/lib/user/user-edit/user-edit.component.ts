@@ -4,6 +4,7 @@ import { of, Subscription, switchMap, tap } from 'rxjs';
 import { UserService } from '../user-service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { NotificationService } from '../../feedback/notifications/notification.service';
 
 @Component({
 	selector: 'lib-user-edit',
@@ -18,7 +19,8 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		private userService: UserService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private authService: AuthService
+		private authService: AuthService,
+		private notificationService: NotificationService
 	) {}
 
 	ngOnInit(): void {
@@ -39,19 +41,30 @@ export class UserEditComponent implements OnInit, OnDestroy {
 		}
 	}
 
-	onSubmit(user: IUser): void {
-		this.subscription = this.userService.updateUser(user).subscribe(() => {
-			this.subscription = this.authService.currentUser$.subscribe((currentUser?: IUserIdentity) => {
-				const updatedUser: IUserIdentity = {
-					_id: user._id,
-					firstName: user.firstName,
-					email: user.email,
-					token: currentUser?.token,
-				};
+	onSubmit(user: IUser, valid: boolean): void {
+		if (!valid) {
+			this.notificationService.error('One of the fields is incorrect or missing!', 6000);
+			return;
+		}
 
-				this.authService.saveUserToLocalStorage(updatedUser);
-				this.router.navigate(['../'], { relativeTo: this.route });
-			});
+		this.subscription = this.userService.updateUser(user).subscribe({
+			next: () => {
+				this.subscription = this.authService.currentUser$.subscribe((currentUser?: IUserIdentity) => {
+					const updatedUser: IUserIdentity = {
+						_id: user._id,
+						firstName: user.firstName,
+						email: user.email,
+						token: currentUser?.token,
+					};
+
+					this.authService.saveUserToLocalStorage(updatedUser);
+					this.router.navigate(['../'], { relativeTo: this.route });
+					this.notificationService.success('Successfully updated your account!', 3000);
+				});
+			},
+			error: (err: any) => {
+				this.notificationService.error(err.error.message, 6000);
+			},
 		});
 	}
 }

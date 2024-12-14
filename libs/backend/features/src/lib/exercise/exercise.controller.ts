@@ -10,7 +10,7 @@ export class ExerciseController {
 	constructor(private exerciseService: ExerciseService) {}
 
 	@Get('')
-	getAll(@Request() req: Request): Promise<IExercise[]> {
+	getAll(): Promise<IExercise[]> {
 		return this.exerciseService.getAll();
 	}
 

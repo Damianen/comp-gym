@@ -15,7 +15,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { AuthService } from './auth/auth.service';
 import { UserDetailComponent } from './user/user-details/user-detail.component';
 import { UserEditComponent } from './user/user-edit/user-edit.component';
-import { LoggedInAuthGuard, UserEditOwnDataAuthGuard } from './auth/auth.guard';
+import { LoggedInAuthGuard } from './auth/auth.guard';
+import { LoadingScreenComponent } from './feedback/loading-screen/loading-screen.component';
+import { NotificationService } from './feedback/notifications/notification.service';
 
 @NgModule({
 	imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
@@ -29,6 +31,7 @@ import { LoggedInAuthGuard, UserEditOwnDataAuthGuard } from './auth/auth.guard';
 		SignupComponent,
 		UserDetailComponent,
 		UserEditComponent,
+		LoadingScreenComponent,
 	],
 	providers: [
 		WorkoutService,
@@ -36,7 +39,7 @@ import { LoggedInAuthGuard, UserEditOwnDataAuthGuard } from './auth/auth.guard';
 		provideHttpClient(),
 		AuthService,
 		LoggedInAuthGuard,
-		UserEditOwnDataAuthGuard,
+		NotificationService,
 	],
 })
 export class FeaturesModule {}

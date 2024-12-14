@@ -5,9 +5,10 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { IUserIdentity } from '@comp-gym/shared/api';
 import { delay } from 'rxjs/operators';
+import { NotificationService } from '../../feedback/notifications/notification.service';
 
 @Component({
-	selector: 'app-login',
+	selector: 'lib-login',
 	templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit, OnDestroy {
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private notificationService: NotificationService
 	) {}
 
 	ngOnInit(): void {
@@ -26,10 +28,15 @@ export class LoginComponent implements OnInit, OnDestroy {
 			password: new FormControl(null, [Validators.required, this.validPassword.bind(this)]),
 		});
 
-		this.subs = this.authService.getUserFromLocalStorage().subscribe((user: IUserIdentity) => {
-			if (user) {
-				this.router.navigate(['/']);
-			}
+		this.subs = this.authService.getUserFromLocalStorage().subscribe({
+			next: (user: IUserIdentity) => {
+				if (user) {
+					this.router.navigate(['/']);
+				}
+			},
+			error: (err: any) => {
+				this.notificationService.error(err.error.message, 6000);
+			},
 		});
 	}
 
@@ -44,11 +51,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 			this.submitted = true;
 			const email = this.loginForm.value.email;
 			const password = this.loginForm.value.password;
-			this.authService.login(email, password).subscribe((user) => {
-				if (user) {
-					this.router.navigate(['/']);
-				}
-				this.submitted = false;
+			this.authService.login(email, password).subscribe({
+				next: (user) => {
+					if (user) {
+						this.router.navigate(['/']);
+						this.notificationService.success('Login was successful!', 3000);
+					} else {
+						this.notificationService.error('Email or Password was not correct!', 4000);
+					}
+					this.submitted = false;
+				},
+				error: (err: any) => {
+					this.notificationService.error(err.error.message, 6000);
+				},
 			});
 		} else {
 			this.submitted = false;

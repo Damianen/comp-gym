@@ -1,30 +1,22 @@
-<main class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-	<form
-		*ngIf="exercise"
-		#exerciseEditFrom="ngForm"
-		(ngSubmit)="exerciseEditFrom.form.valid && onSubmit(exercise)"
-		novalidate
-	>
-		<div class="space-y-12">
-			<div>
+@if (!exercise) {
+	<lib-loading-screen></lib-loading-screen>
+} @else {
+	<main class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+		<form
+			*ngIf="exercise"
+			#exerciseEditFrom="ngForm"
+			(ngSubmit)="onSubmit(exercise, exerciseEditFrom.form.valid)"
+			novalidate
+		>
+			<div class="space-y-12 border-b border-white/10">
 				<h2 class="text-base/7 font-semibold text-white">
-					{{
-						exercise.name === '' ? 'New Exercise' : 'Edit Exercise'
-					}}
+					{{ exercise.name === '' ? 'New Exercise' : 'Edit Exercise' }}
 				</h2>
-				<p class="mt-1 text-sm/6 text-gray-400">
-					Here you can edit the details of your exercise
-				</p>
+				<p class="mt-1 text-sm/6 text-gray-400">Here you can edit the details of your exercise</p>
 
-				<div
-					class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6"
-				>
+				<div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
 					<div class="sm:col-span-4">
-						<label
-							for="name"
-							class="block text-sm/6 font-medium text-white"
-							>Name</label
-						>
+						<label for="name" class="block text-sm/6 font-medium text-white">Name</label>
 						<div class="mt-2">
 							<div
 								class="flex rounded-md bg-white/5 ring-1 ring-inset ring-white/10 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-500"
@@ -44,11 +36,7 @@
 					</div>
 
 					<div class="col-span-full">
-						<label
-							for="about"
-							class="block text-sm/6 font-medium text-white"
-							>Description</label
-						>
+						<label for="about" class="block text-sm/6 font-medium text-white">Description</label>
 						<div class="mt-2">
 							<textarea
 								#userTitle="ngModel"
@@ -63,11 +51,7 @@
 					</div>
 
 					<div class="col-span-full hidden">
-						<label
-							for="photo"
-							class="block text-sm/6 font-medium text-white"
-							>Photo</label
-						>
+						<label for="photo" class="block text-sm/6 font-medium text-white">Photo</label>
 						<div class="mt-2 flex items-center gap-x-3">
 							<svg
 								class="size-12 text-gray-500"
@@ -90,51 +74,47 @@
 							</button>
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<div class="border-b border-white/10 pb-12">
-				<div class="mt-10 space-y-10">
-					<fieldset
-						#userTitle="ngModel"
-						[(ngModel)]="exercise.exerciseType"
-						required
-					>
-						<legend class="text-sm/6 font-semibold text-white">
-							exercise-Type
-						</legend>
-						<div class="mt-6 space-y-6">
-							<div
-								class="flex items-center gap-x-3"
-								*ngFor="let item of exerciseTypeList"
+					<div class="pb-6 col-span-3">
+						<label for="country" class="block text-sm/6 font-medium text-white">Exercise type</label>
+						<div class="mt-2 grid grid-cols-1">
+							<select
+								#userTitle="ngModel"
+								[(ngModel)]="exercise.exerciseType"
+								id="push-everything"
+								name="exercise-type"
+								required
+								class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white/5 py-1.5 pl-3 pr-8 text-base text-white outline outline-1 -outline-offset-1 outline-white/10 *:bg-gray-800 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
 							>
-								<input
-									id="push-everything"
-									[value]="item.value"
-									name="exercise-type"
-									type="radio"
-									class="size-4 border-white/10 bg-white/5 text-indigo-600 focus:ring-indigo-600 focus:ring-offset-gray-900"
+								<option *ngFor="let item of exerciseTypeList" class="">
+									{{ item.key }}
+								</option>
+							</select>
+							<svg
+								class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-400 sm:size-4"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								aria-hidden="true"
+								data-slot="icon"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+									clip-rule="evenodd"
 								/>
-								<label
-									for="push-everything"
-									class="block text-sm/6 font-medium text-white"
-									>{{ item.key }}</label
-								>
-							</div>
+							</svg>
 						</div>
-					</fieldset>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="mt-6 flex items-center justify-end gap-x-6">
-			<button
-				type="submit"
-				[disabled]="!exerciseEditFrom.valid"
-				class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-			>
-				Save
-			</button>
-		</div>
-	</form>
-</main>
+			<div class="mt-6 flex items-center justify-end gap-x-6">
+				<button
+					type="submit"
+					class="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+				>
+					Save
+				</button>
+			</div>
+		</form>
+	</main>
+}

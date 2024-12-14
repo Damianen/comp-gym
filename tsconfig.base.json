@@ -19,6 +19,7 @@
 			"@comp-gym/backend/dto": ["libs/backend/dto/src/index.ts"],
 			"@comp-gym/backend/features": ["libs/backend/features/src/index.ts"],
 			"@comp-gym/backend/user": ["libs/backend/user/src/index.ts"],
+			"@comp-gym/feedback": ["libs/shared/feedback/src/index.ts"],
 			"@comp-gym/frontend/common": ["libs/frontend/common/src/index.ts"],
 			"@comp-gym/frontend/features": ["libs/frontend/features/src/index.ts"],
 			"@comp-gym/frontend/ui": ["libs/frontend/ui/src/index.ts"],
