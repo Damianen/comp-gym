@@ -38,6 +38,11 @@ export class WorkoutController {
 		return this.workoutService.delete(id);
 	}
 
+	@Post('/delete')
+	deleteMany(@Body() ids: any): Promise<any> {
+		return this.workoutService.deleteMany(ids.ids);
+	}
+
 	@Put(':id/exercise/:exerciseId')
 	@UseGuards(IsWorkoutFromUserGuard)
 	addExercise(@Param('id') id: string, @Param('exerciseId') exerciseId: string): Promise<IWorkout | null> {

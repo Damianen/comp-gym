@@ -11,7 +11,7 @@ export class Neo4jExerciseService {
 	}
 
 	async deleteExercise(_id: string): Promise<void> {
-		await this.neo4jService.write(`MATCH (e:Exercise {_id: '${_id}'}) DELETE e`);
+		await this.neo4jService.write(`MATCH (e:Exercise {_id: '${_id}'}) DETACH DELETE e`);
 	}
 
 	async addSetAmount(setAmount: SetAmountDto) {

@@ -5,6 +5,7 @@ import { UserService } from '../user-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
 import { NotificationService } from '../../feedback/notifications/notification.service';
+import { WorkoutService } from '../../workout/workout.service';
 
 @Component({
 	selector: 'lib-user-detail',
@@ -21,7 +22,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private router: Router,
 		private authService: AuthService,
-		private notificationService: NotificationService
+		private notificationService: NotificationService,
+		private workoutService: WorkoutService
 	) {}
 
 	ngOnInit(): void {
@@ -48,11 +50,14 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 	}
 
 	deleteUser(id: string | null | undefined): void {
-		this.subscription?.add(
-			this.userService.deleteUser(id as string).subscribe({
-				next: () => {
-					this.subscription?.add(
-						this.userService.deleteNeo4jUser(id as string).subscribe({
+		this.subscription = this.workoutService.getWorkoutsAsync().subscribe((workouts) => {
+			const ids: string[] = [];
+			workouts.forEach((workout) => ids.push(workout._id as string));
+
+			this.subscription = this.workoutService.deleteWorkouts(ids).subscribe(() => {
+				this.userService.deleteUser(id as string).subscribe({
+					next: () => {
+						this.subscription = this.userService.deleteNeo4jUser(id as string).subscribe({
 							next: () => {
 								this.authService.logout();
 								this.router.navigate(['../'], {
@@ -63,13 +68,13 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 							error: (err: any) => {
 								this.notificationService.error(err.message, 6000);
 							},
-						})
-					);
-				},
-				error: (err: any) => {
-					this.notificationService.error(err.message, 6000);
-				},
-			})
-		);
+						});
+					},
+					error: (err: any) => {
+						this.notificationService.error(err.message, 6000);
+					},
+				});
+			});
+		});
 	}
 }

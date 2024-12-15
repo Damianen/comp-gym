@@ -19,7 +19,13 @@ export class WorkoutService {
 
 	async getAll(req: any): Promise<IWorkout[]> {
 		const items = await this.workoutModel.find().populate('user', 'exercises').exec();
-		return items.filter((item) => item.user._id == req['user']['user_id']);
+		return items.filter((item) => {
+			if (item.user) {
+				return item.user._id == req['user']['user_id'];
+			} else {
+				return false;
+			}
+		});
 	}
 
 	async getById(_id: string): Promise<IWorkout | null> {
@@ -39,6 +45,10 @@ export class WorkoutService {
 
 	async delete(_id: string): Promise<IWorkout | null> {
 		return this.workoutModel.findByIdAndDelete({ _id });
+	}
+
+	async deleteMany(ids: Array<string>): Promise<any> {
+		return this.workoutModel.deleteMany({ _id: { $in: ids } });
 	}
 
 	async addExercise(_id: string, exerciseId: string): Promise<IWorkout | null> {

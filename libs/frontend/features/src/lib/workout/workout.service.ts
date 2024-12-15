@@ -5,6 +5,7 @@ import { IUpdateSet, ISet, SetType } from '@comp-gym/shared/api';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@comp-gym/shared/util-env';
 import { AuthService } from '../auth/auth.service';
+import { Result } from 'nest-neo4j/dist';
 
 @Injectable({
 	providedIn: 'root',
@@ -104,6 +105,20 @@ export class WorkoutService {
 		return this.http
 			.delete<ApiResponse<any>>(
 				environment.API_URL + 'workout/' + _id + '/set/' + exerciseIndex + '/' + setIndex,
+				{
+					headers: {
+						authorization: `Bearer ${this.user?.token as string}`,
+					},
+				}
+			)
+			.pipe(map((response) => response.results));
+	}
+
+	deleteWorkouts(ids: Array<string>): Observable<any> {
+		return this.http
+			.post<ApiResponse<any>>(
+				environment.API_URL + 'workout/delete',
+				{ ids: ids },
 				{
 					headers: {
 						authorization: `Bearer ${this.user?.token as string}`,
