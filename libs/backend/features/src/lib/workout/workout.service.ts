@@ -18,12 +18,12 @@ export class WorkoutService {
 	) {}
 
 	async getAll(req: any): Promise<IWorkout[]> {
-		const items = await this.workoutModel.find().populate('exercises', 'user').exec();
-		return items.filter((item) => item.user?._id == req['user']['user_id']);
+		const items = await this.workoutModel.find().populate('user', 'exercises').exec();
+		return items.filter((item) => item.user._id == req['user']['user_id']);
 	}
 
 	async getById(_id: string): Promise<IWorkout | null> {
-		const item = await this.workoutModel.findOne({ _id }).populate('exercises', 'user').exec();
+		const item = await this.workoutModel.findOne({ _id }).populate('user', 'exercises').exec();
 		return item;
 	}
 

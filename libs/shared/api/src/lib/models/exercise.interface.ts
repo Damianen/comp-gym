@@ -1,5 +1,4 @@
 import { IEntity } from './entity.interface';
-import { ISet } from './set.interface';
 
 export enum ExerciseType {
 	BodyWheight = 'BodyWheigt',
@@ -16,6 +15,15 @@ export interface IExercise extends IEntity {
 	name: string;
 	description: string;
 	exerciseType: ExerciseType;
+}
+
+export interface ISetAmount {
+	userId: string;
+	exerciseId: string;
+}
+
+export interface INeo4jExercise {
+	_id: string;
 }
 
 export type ICreateExercise = Pick<IExercise, 'name' | 'description' | 'exerciseType'>;

@@ -82,7 +82,7 @@ export class WorkoutEditComponent implements OnInit, OnDestroy {
 						this.notificationService.success('Workout successfully updated!', 3000);
 					},
 					(err: any) => {
-						this.notificationService.error(err.error.message, 6000);
+						this.notificationService.error(err.message, 6000);
 					}
 				)
 			);
@@ -96,7 +96,7 @@ export class WorkoutEditComponent implements OnInit, OnDestroy {
 						this.notificationService.success('Workout successfully created!', 3000);
 					},
 					(err: any) => {
-						this.notificationService.error(err.error.message, 6000);
+						this.notificationService.error(err.message, 6000);
 					}
 				)
 			);

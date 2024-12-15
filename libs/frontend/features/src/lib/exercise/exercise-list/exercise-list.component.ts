@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IExercise } from '@comp-gym/shared/api';
+import { IExercise, IUserIdentity } from '@comp-gym/shared/api';
 import { map, Subscription, switchMap } from 'rxjs';
 import { ExerciseService } from '../exercise.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { NotificationService } from '../../feedback/notifications/notification.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
 	selector: 'lib-exercise-list',
@@ -11,18 +12,34 @@ import { NotificationService } from '../../feedback/notifications/notification.s
 })
 export class ExerciseListComponent implements OnInit, OnDestroy {
 	exercises?: IExercise[];
+	recommendedExercises?: IExercise[];
 	subscription?: Subscription;
 	workoutId?: string;
 	constructor(
 		private exerciseService: ExerciseService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private notificationService: NotificationService
+		private notificationService: NotificationService,
+		private authService: AuthService
 	) {}
 
 	ngOnInit(): void {
 		this.subscription = this.exerciseService.getExercisesAsync().subscribe((exercises) => {
 			this.exercises = exercises;
+		});
+
+		this.subscription = this.authService.currentUser$.subscribe((currentUser?: IUserIdentity) => {
+			if (currentUser) {
+				this.subscription = this.exerciseService
+					.getRecommendedExerciseIdsForUser(currentUser._id as string)
+					.subscribe((exerciseIds) => {
+						this.subscription = this.exerciseService
+							.getExercisesFromIdArray(exerciseIds)
+							.subscribe((exercises) => {
+								this.recommendedExercises = exercises;
+							});
+					});
+			}
 		});
 
 		this.subscription = this.route.paramMap
@@ -45,7 +62,7 @@ export class ExerciseListComponent implements OnInit, OnDestroy {
 				this.notificationService.success('Successfully deleted exercise!', 3000);
 			},
 			error: (err: any) => {
-				this.notificationService.error(err.error.message, 6000);
+				this.notificationService.error(err.message, 6000);
 			},
 		});
 	}
@@ -59,7 +76,7 @@ export class ExerciseListComponent implements OnInit, OnDestroy {
 					this.notificationService.success('Successfully added exercise to workout!', 3000);
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 	}

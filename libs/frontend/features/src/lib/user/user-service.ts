@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { map, Observable, tap, of, catchError, Subscription } from 'rxjs';
-import { ApiResponse, IUser, IUserIdentity } from '@comp-gym/shared/api';
+import { ApiResponse, INeo4jUser, IUser, IUserIdentity } from '@comp-gym/shared/api';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '@comp-gym/shared/util-env';
 import { AuthService } from '../auth/auth.service';
@@ -63,5 +63,17 @@ export class UserService implements OnDestroy {
 				},
 			})
 			.pipe(map((response) => response.results));
+	}
+
+	createNeo4jUser(user: INeo4jUser): Observable<any> {
+		return this.http.post<ApiResponse<any>>(environment.RCMD_API_URL + 'neo4j/user', user);
+	}
+
+	deleteNeo4jUser(id: string): Observable<any> {
+		return this.http.delete<ApiResponse<any>>(environment.RCMD_API_URL + 'neo4j/user/' + id, {
+			headers: {
+				authorization: `Bearer ${this.user?.token as string}`,
+			},
+		});
 	}
 }

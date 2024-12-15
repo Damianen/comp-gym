@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { IUserIdentity } from '@comp-gym/shared/api';
+import { ApiResponse, IUserIdentity } from '@comp-gym/shared/api';
 import { Router } from '@angular/router';
 import { environment } from '@comp-gym/shared/util-env';
 import { map, catchError, switchMap } from 'rxjs/operators';
@@ -39,32 +39,26 @@ export class AuthService {
 
 	login(email: string, password: string): Observable<IUserIdentity | undefined> {
 		return this.http
-			.post<{
-				results: any;
-			}>(
-				`${environment.API_URL}auth/login`,
-				{ emailAddress: email, password: password },
-				{ headers: this.headers }
-			)
+			.post<
+				ApiResponse<any>
+			>(`${environment.API_URL}auth/login`, { email: email, password: password }, { headers: this.headers })
 			.pipe(
 				map((response) => {
-					if (response.results?.response?.error != undefined) {
-						throw new Error(response.results.response.message);
+					if (response.results.response?.error != undefined) {
+						throw new Error(response.results?.message);
 					}
+
 					const user = response.results;
 					this.saveUserToLocalStorage(user);
 					this.currentUser$.next(user);
 					return user;
-				}),
-				catchError((error: any) => {
-					return of(undefined);
 				})
 			);
 	}
 
-	register(userData: IUserRegistration): Observable<IUserIdentity | undefined> {
+	register(userData: IUserRegistration): Observable<IUserIdentity | undefined | null> {
 		return this.http
-			.post<any>(`${environment.API_URL}user`, userData, {
+			.post<any>(`${environment.API_URL}auth/register`, userData, {
 				headers: this.headers,
 			})
 			.pipe(

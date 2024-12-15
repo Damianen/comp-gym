@@ -28,7 +28,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
 				this.workouts = workouts;
 			},
 			error: (err: any) => {
-				this.notificationService.error(err.error.message, 6000);
+				this.notificationService.error(err.message, 6000);
 			},
 		});
 	}
@@ -44,7 +44,7 @@ export class WorkoutListComponent implements OnInit, OnDestroy {
 				this.notificationService.success('Workout successfully deleted!', 3000);
 			},
 			error: (err: any) => {
-				this.notificationService.error(err.error.message, 6000);
+				this.notificationService.error(err.message, 6000);
 			},
 		});
 	}

@@ -19,6 +19,11 @@ export class ExerciseController {
 		return this.exerciseService.getById(id);
 	}
 
+	@Post('ids')
+	getByIdArray(@Body() body: any): Promise<IExercise[] | null> {
+		return this.exerciseService.getByIdArray(body);
+	}
+
 	@Post('')
 	create(@Body() req: any): Promise<IExercise | null> {
 		return this.exerciseService.create(req);

@@ -43,7 +43,7 @@ export class IsWorkoutFromUserGuard implements CanActivate {
 		const request = context.switchToHttp().getRequest();
 
 		try {
-			const workout = await this.workoutModel.findById(request.params.id).populate('user').exec();
+			const workout = await this.workoutModel.findById({ _id: request.params.id }).populate('user').exec();
 
 			if (workout?.user._id != request['user']['user_id']) {
 				throw new UnauthorizedException();

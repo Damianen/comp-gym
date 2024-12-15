@@ -48,7 +48,7 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 					this.exercise = exercise;
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 	}
@@ -80,7 +80,7 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 						this.notificationService.success('Exercise successfully updated!', 3000);
 					},
 					error: (err: any) => {
-						this.notificationService.error(err.error.message, 6000);
+						this.notificationService.error(err.message, 6000);
 					},
 				})
 			);
@@ -94,7 +94,7 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 						this.notificationService.success('Exercise successfully created!', 3000);
 					},
 					error: (err: any) => {
-						this.notificationService.error(err.error.message, 6000);
+						this.notificationService.error(err.message, 6000);
 					},
 				})
 			);
@@ -111,7 +111,7 @@ export class ExerciseEditComponent implements OnInit, OnDestroy {
 					this.notificationService.success('Exercise successfully deleted!', 3000);
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			})
 		);

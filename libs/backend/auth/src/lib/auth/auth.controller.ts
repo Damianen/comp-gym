@@ -12,13 +12,18 @@ export class AuthController {
 	@Public()
 	@Post('login')
 	async login(@Body() credentials: IUserCredentials): Promise<IUserIdentity> {
-		return await this.authService.login(credentials);
+		const user = await this.authService.login(credentials);
+		return user;
 	}
 
 	@Public()
 	@UseGuards(UserExistGuard)
 	@Post('register')
-	async register(@Body() user: UserDto): Promise<IUserIdentity> {
-		return await this.authService.register(user);
+	async register(@Body() user: UserDto): Promise<IUserIdentity | null> {
+		try {
+			return await this.authService.register(user);
+		} catch (err: any) {
+			return null;
+		}
 	}
 }

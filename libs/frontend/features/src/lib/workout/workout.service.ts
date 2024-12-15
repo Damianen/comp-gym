@@ -31,7 +31,6 @@ export class WorkoutService {
 	}
 
 	getWorkoutsAsync(): Observable<IWorkout[]> {
-		console.log('test');
 		return this.http
 			.get<ApiResponse<any>>(environment.API_URL + 'workout', {
 				headers: {

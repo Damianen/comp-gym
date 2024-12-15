@@ -23,6 +23,7 @@
 			"@comp-gym/frontend/common": ["libs/frontend/common/src/index.ts"],
 			"@comp-gym/frontend/features": ["libs/frontend/features/src/index.ts"],
 			"@comp-gym/frontend/ui": ["libs/frontend/ui/src/index.ts"],
+			"@comp-gym/neo4j": ["libs/backend/neo4j/src/index.ts"],
 			"@comp-gym/shared/api": ["libs/shared/api/src/index.ts"],
 			"@comp-gym/shared/util-env": ["libs/shared/util-env/src/index.ts"],
 			"@comp-gym/user": ["libs/backend/user/src/index.ts"]

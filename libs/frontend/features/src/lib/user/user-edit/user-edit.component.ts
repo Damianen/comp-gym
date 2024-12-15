@@ -63,7 +63,7 @@ export class UserEditComponent implements OnInit, OnDestroy {
 				});
 			},
 			error: (err: any) => {
-				this.notificationService.error(err.error.message, 6000);
+				this.notificationService.error(err.message, 6000);
 			},
 		});
 	}

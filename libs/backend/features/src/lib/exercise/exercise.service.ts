@@ -22,6 +22,11 @@ export class ExerciseService {
 		return item;
 	}
 
+	async getByIdArray(ids: Array<string>): Promise<IExercise[]> {
+		const items = await this.exerciseModel.find({ _id: { $in: ids } });
+		return items;
+	}
+
 	async create(exercise: ExerciseDto): Promise<IExercise | null> {
 		if (exercise) {
 			const createdItem = {

@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ISet, IWorkout, SetType } from '@comp-gym/shared/api';
+import { ISet, IUserIdentity, IWorkout, SetType } from '@comp-gym/shared/api';
 import { WorkoutService } from '../workout.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ExerciseService } from '../../exercise/exercise.service';
 import { NotificationService } from '../../feedback/notifications/notification.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
 	selector: 'lib-workout-detail',
@@ -24,7 +25,8 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private router: Router,
 		private exerciseService: ExerciseService,
-		private notificationService: NotificationService
+		private notificationService: NotificationService,
+		private authService: AuthService
 	) {
 		this.sets = [];
 	}
@@ -46,7 +48,7 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
 					});
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 		});
@@ -57,15 +59,31 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
 	}
 
 	deleteExercise(exerciseIndex: number | undefined): void {
+		const setAmount = this.workout.exercises[exerciseIndex as number].sets.length;
 		this.subscription = this.workoutService
-			.deleteExerciseFromWorkout(this.workout?._id as string, exerciseIndex as number)
+			.deleteExerciseFromWorkout(this.workout._id as string, exerciseIndex as number)
 			.subscribe({
 				next: () => {
-					this.ngOnInit();
-					this.notificationService.success('Exercise successfully deleted!', 2000);
+					this.subscription = this.exerciseService
+						.removeSetsToNeo4jExercise(
+							{
+								userId: this.workout.user?._id as string,
+								exerciseId: this.workout.exercises[exerciseIndex as number].exercise._id as string,
+							},
+							setAmount
+						)
+						.subscribe({
+							next: () => {
+								this.ngOnInit();
+								this.notificationService.success('Exercise successfully deleted!', 2000);
+							},
+							error: (err: any) => {
+								this.notificationService.error(err.message, 6000);
+							},
+						});
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 	}
@@ -80,11 +98,23 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
 			.addSetToWorkout(this.workout?._id as string, this.sets[exerciseIndex as number], exerciseIndex as number)
 			.subscribe({
 				next: () => {
-					this.ngOnInit();
-					this.notificationService.success('set successfully created!', 2000);
+					this.subscription = this.exerciseService
+						.addSetToNeo4jExercise({
+							userId: this.workout.user?._id as string,
+							exerciseId: this.workout.exercises[exerciseIndex as number].exercise._id as string,
+						})
+						.subscribe({
+							next: () => {
+								this.ngOnInit();
+								this.notificationService.success('set successfully created!', 2000);
+							},
+							error: (err: any) => {
+								this.notificationService.error(err.message, 6000);
+							},
+						});
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 	}
@@ -94,11 +124,23 @@ export class WorkoutDetailComponent implements OnInit, OnDestroy {
 			.deleteSetFromWorkout(this.workout?._id as string, exerciseIndex as number, setIndex as number)
 			.subscribe({
 				next: () => {
-					this.ngOnInit();
-					this.notificationService.success('set successfully deleted!', 2000);
+					this.subscription = this.exerciseService
+						.removeSetToNeo4jExercise({
+							userId: this.workout.user?._id as string,
+							exerciseId: this.workout.exercises[exerciseIndex as number].exercise._id as string,
+						})
+						.subscribe({
+							next: () => {
+								this.ngOnInit();
+								this.notificationService.success('set successfully deleted!', 2000);
+							},
+							error: (err: any) => {
+								this.notificationService.error(err.message, 6000);
+							},
+						});
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 	}

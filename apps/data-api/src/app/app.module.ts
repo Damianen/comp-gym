@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from '@comp-gym/backend/user';
 import { MongooseModule } from '@nestjs/mongoose';
 import { WorkoutModule, ExerciseModule } from '@comp-gym/backend/features';
@@ -22,7 +20,7 @@ import { AuthModule } from '@comp-gym/auth';
 			},
 		}),
 	],
-	controllers: [AppController],
-	providers: [AppService],
+	controllers: [],
+	providers: [],
 })
 export class AppModule {}

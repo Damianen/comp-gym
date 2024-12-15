@@ -18,7 +18,7 @@ export class AuthService {
 
 	async validateUser(credentials: IUserCredentials): Promise<any> {
 		const user = await this.userModel.findOne({
-			emailAddress: credentials.email,
+			email: credentials.email,
 		});
 		if (user && user.password === credentials.password) {
 			return user;
@@ -29,7 +29,7 @@ export class AuthService {
 	async login(credentials: IUserCredentials): Promise<IUserIdentity> {
 		return await this.userModel
 			.findOne({
-				emailAddress: credentials.email,
+				email: credentials.email,
 			})
 			.select('+password')
 			.exec()
@@ -55,9 +55,10 @@ export class AuthService {
 	}
 
 	async register(user: UserDto): Promise<IUserIdentity> {
-		if (await this.userModel.findOne({ emailAddress: user.email })) {
+		if (await this.userModel.findOne({ email: user.email })) {
 			throw new ConflictException('User already exist');
 		}
+
 		const createdItem = await this.userModel.create(user);
 		return createdItem;
 	}

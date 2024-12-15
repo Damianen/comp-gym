@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserIdentity } from '@comp-gym/shared/api';
+import { INeo4jUser, IUserIdentity } from '@comp-gym/shared/api';
 import { UserService } from '../../user/user-service';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from '../../feedback/notifications/notification.service';
@@ -54,14 +54,26 @@ export class SignupComponent implements OnInit, OnDestroy {
 				weight: Number(this.signupForm.value.weight),
 			};
 			this.subscription = this.authService.register(userValues).subscribe({
-				next: () => {
-					this.router.navigate(['../login'], {
-						relativeTo: this.route,
+				next: (user) => {
+					if (user == null || undefined) {
+						this.notificationService.error('Account with this email already exists!', 6000);
+						return;
+					}
+					const neo4jUser: INeo4jUser = { _id: user?._id as string };
+					this.subscription = this.userService.createNeo4jUser(neo4jUser).subscribe({
+						next: () => {
+							this.router.navigate(['../login'], {
+								relativeTo: this.route,
+							});
+							this.notificationService.success('Your account was successfully created!', 3000);
+						},
+						error: (err: any) => {
+							this.notificationService.error(err.message, 6000);
+						},
 					});
-					this.notificationService.success('Your account was successfully created!', 3000);
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 		}

@@ -31,7 +31,6 @@ export class NotificationComponent implements OnInit, OnDestroy {
 
 	private open(notification: INotification) {
 		this.notifications.push(notification);
-		console.log('test');
 		setTimeout(() => {
 			this.close(notification);
 		}, notification.duration as number);

@@ -36,7 +36,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 					});
 			},
 			error: (err: any) => {
-				this.notificationService.error(err.error.message, 6000);
+				this.notificationService.error(err.message, 6000);
 			},
 		});
 	}
@@ -51,14 +51,23 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 		this.subscription?.add(
 			this.userService.deleteUser(id as string).subscribe({
 				next: () => {
-					this.authService.logout();
-					this.router.navigate(['../'], {
-						relativeTo: this.route,
-					});
-					this.notificationService.success('Successfully deleted your account!', 3000);
+					this.subscription?.add(
+						this.userService.deleteNeo4jUser(id as string).subscribe({
+							next: () => {
+								this.authService.logout();
+								this.router.navigate(['../'], {
+									relativeTo: this.route,
+								});
+								this.notificationService.success('Successfully deleted your account!', 3000);
+							},
+							error: (err: any) => {
+								this.notificationService.error(err.message, 6000);
+							},
+						})
+					);
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			})
 		);

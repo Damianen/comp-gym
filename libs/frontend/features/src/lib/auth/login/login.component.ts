@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 				}
 			},
 			error: (err: any) => {
-				this.notificationService.error(err.error.message, 6000);
+				this.notificationService.error(err.message, 6000);
 			},
 		});
 	}
@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 					this.submitted = false;
 				},
 				error: (err: any) => {
-					this.notificationService.error(err.error.message, 6000);
+					this.notificationService.error(err.message, 6000);
 				},
 			});
 		} else {
