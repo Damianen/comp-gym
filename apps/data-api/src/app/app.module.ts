@@ -5,6 +5,7 @@ import { WorkoutModule, ExerciseModule } from '@comp-gym/backend/features';
 import { AuthModule } from '@comp-gym/auth';
 import { Neo4jModule } from 'nest-neo4j';
 import { Neo4jBackendModule } from '@comp-gym/neo4j';
+import { ConditionalModule } from '@nestjs/config';
 
 @Module({
 	imports: [
